@@ -13,7 +13,7 @@ void Menu::run(){
     sf::RectangleShape bg;
     //bg.setTexture(spriteSheet);
     //bg.setTextureRect(posx,posy,midax,miday)
-    bg.setFillColor(sf::Color(255,0,0));
+    bg.setFillColor(sf::Color(0,0,0));
     
     
     
