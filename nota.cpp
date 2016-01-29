@@ -9,9 +9,8 @@ Nota::Nota(int nota){
 	
 	type = nota;
 	
-	sf::Texture texture;
-	if (!texture.loadFromFile("./images/spriteSheet.jpg")) std::cout << "Error al carregar la textura" << std::endl;
-	spr.setTexture(texture);
+	spr.setTexture(spriteSheet);
+	//spr.setTextureRect(a,b,c,d); falta posar les dimensions del rectangle aka REKT!!
 	//spr.setTextureRect(a,b,c,d); falta posar les dimensions del rectangle aka REKT!!
 	
 	spr.setPosition(sf::Vector2f((W_WIDTH/5) * type,0));
