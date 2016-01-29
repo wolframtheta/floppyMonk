@@ -13,30 +13,32 @@ void Menu::run(){
     bg.setFillColor(sf::Color(0,0,0));
     
     
-    
     sf::RectangleShape play;
     play.setFillColor(sf::Color(255,255,255));
-    play.setSize(sf::Vector2f(100,50));
+    play.setSize(sf::Vector2f(150,50));
     play.setPosition(20,20);
-    
+    sf::IntRect Rplay(20,20,150,50);
     
     sf::RectangleShape credits;
     credits.setFillColor(sf::Color(255,255,255));
-    credits.setSize(sf::Vector2f(100,50));
+    credits.setSize(sf::Vector2f(150,50));
     credits.setPosition(20,90);
+    sf::IntRect Rcred(20,90,150,50);
     
     
     sf::RectangleShape exit;
     exit.setFillColor(sf::Color(255,255,255));
-    exit.setSize(sf::Vector2f(100,50));
+    exit.setSize(sf::Vector2f(150,50));
     exit.setPosition(20,160);
+    sf::IntRect Rexit(20,160,150,50);
     
-    sf::RectangleShape cursorAim;
-    cursorAim.setSize(sf::Vector2f(2,2));
-    cursorAim.setOrigin(1,1);
+    
+    
+
     
     while (window.isOpen()){
         window.clear();
+        
         
         sf::Event event;
         while (window.pollEvent(event)){
@@ -48,21 +50,22 @@ void Menu::run(){
             }
             
             if (event.type == sf::Event::MouseButtonReleased){
-                cursorAim.setPosition(sf::Mouse::getPosition(window));
-                if (cursorAim.intersects(play)){
+                sf::Vector2i mousepos = sf::Mouse::getPosition(window);
+                sf::IntRect cursorAim(mousepos.x-1,mousepos.y-1,2,2);
+                if (cursorAim.intersects(Rplay)){
                     std::cout << "Play ok!" << std::endl;
                     //Hide buttons
                     //joc.play()
                     //Show buttons
                 }
-                else if (cursorAim.instersects(credits)){
+                else if (cursorAim.intersects(Rcred)){
                     std::cout << "Credits ok!" << std::endl;
                     //Hide buttons
                     //Roll the credits
                     //Display buttons
                 }
-                else if (cursorAim.intersects(exit)){
-                    window.close;
+                else if (cursorAim.intersects(Rexit)){
+                    window.close();
                 }
             }
             
