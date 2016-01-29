@@ -1,11 +1,10 @@
 //#include "utils.hpp"
 
-#include "menu.hpp"
-#include <SFML/Graphics.hpp>
+#include "utils.hpp"
 
 void Menu::run(){
     
-    sf::RenderWindow window(sf::VideoMode(400, 600), "Floppy Monk");
+    sf::RenderWindow window(sf::VideoMode(W_WIDTH, W_HEIGHT), APP_NAME);
     
     //sf::Texture spriteSheet;
     //if (!spriteSheet.loadFromFile("./images/spriteSheet.jpg")) std::cout << "Error loading spriteSheet" << std::endl;
