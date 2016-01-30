@@ -122,7 +122,9 @@ void Game::play(){
 		//else monjo.upLvlConc();
 		
 		bool notaPerduda = false;
+		std::cout<<"ffff"<<std::endl;
 		notaPerduda = musica.update();
+		std::cout<<"ssss"<<std::endl;
 		if (notaPerduda) monjo.downLvlConc(true);
 		std::list<Nota>::iterator it = musica.listNotes.begin();
 		while (it != musica.listNotes.end()){
@@ -137,7 +139,7 @@ void Game::play(){
 	
 	if (not exitLoop) { //Player dead
             
-            //Game over blah blah blah
+            std::cout<<"DEAD"<<std::endl;
         }
 	
 	

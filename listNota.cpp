@@ -25,16 +25,23 @@ bool listNota::update(){
 	
 	std::list<Nota>::iterator it = listNotes.begin();
 	while (it != listNotes.end()){
+				std::cout<<"bef update"<<std::endl;
 		(*it).update();
+						std::cout<<"after update"<<std::endl;
+
 		if ((*it).fora()){
-			listNotes.erase(it);
-			it--;
+			std::cout<<"before erase"<<std::endl;
+			listNotes.erase(it--);
+			std::cout<<"after erase"<<std::endl;
 			notaPerduda = true;
 		}
+		++it;
+		std::cout<<"after sum"<<std::endl;
 	}
 	
 	//Play background music
-	
+			std::cout<<"returning"<<std::endl;
+
 	return notaPerduda;
 }
 
