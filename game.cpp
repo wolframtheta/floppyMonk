@@ -323,11 +323,11 @@ void Game::play(){
 
 
 		string text = "Score points - " + to_string(mana) 
-		+ "\n\nRacha maxima - " + to_string(max_combo) 
-		+ "\n\n# aciertos - " + to_string(acertadas) 
-		+ "\n\n# fallos - " + to_string(falladas)  
-		+ "\n\nTiempo - " + to_string((int) ((elapsed_t.asSeconds() - 0.5)+1))
-		+ "segundos\n\n                                               PRESS RETURN TO EXIT";
+		+ "\n\nMaximum streak - " + to_string(max_combo) 
+		+ "\n\nHits - " + to_string(acertadas) 
+		+ "\n\nMisses - " + to_string(falladas)  
+		+ "\n\nTime - " + to_string((int) ((elapsed_t.asSeconds() - 0.5)+1))
+		+ "seconds\n\n                                               PRESS RETURN TO EXIT";
 		sf::Text scoreText(text, font, 20);
 		scoreText.setColor(sf::Color(255,255,255));
 		scoreText.setPosition(sf::Vector2f(W_WIDTH/2 - 400 + 70,W_HEIGHT/2 - 300 +20));
