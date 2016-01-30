@@ -64,16 +64,16 @@ void Game::play(){
 
     	sf::SoundBuffer buffer1, buffer2, buffer3, buffer4;
 		sf::Sound soundQ;
-		buffer1.loadFromFile("./resources/music_n/1.wav");
+		buffer1.loadFromFile("./resources/music/1.ogg");
 		soundQ.setBuffer(buffer1);	
 		sf::Sound soundW;
-		buffer2.loadFromFile("./resources/music_n/2.wav");
+		buffer2.loadFromFile("./resources/music/2.ogg");
 		soundW.setBuffer(buffer2);
 		sf::Sound soundE;
-		buffer3.loadFromFile("./resources/music_n/3.ogg");
+		buffer3.loadFromFile("./resources/music/3.ogg");
 		soundE.setBuffer(buffer3);
 		sf::Sound soundR;
-		buffer4.loadFromFile("./resources/music_n/4.wav");
+		buffer4.loadFromFile("./resources/music/4.ogg");
 		soundR.setBuffer(buffer4);
 
 		
