@@ -35,8 +35,7 @@ void Game::play(){
         hp2.setFillColor(sf::Color(255,0,0));
     	hp2.setSize(sf::Vector2f(W_WIDTH/3,20));
     	hp2.setPosition(200,130);
-    	_myWindow->draw(hp1);
-    	_myWindow->draw(hp2);
+
 
 
 	Monjo monjo;
@@ -47,6 +46,7 @@ void Game::play(){
 	
         
         listNota musica;
+        listNota musica2;
         //frequencia entre notes
         sf::Sprite spriteNota;
         sf::Texture notaT;
@@ -55,28 +55,31 @@ void Game::play(){
         
 	//creem el rellotge del joc
 	sf::Clock clock;
+        sf::Clock clock2;
 	sf::Time time = sf::seconds(0);
+        sf::Time time2 = sf::seconds(0);
         
         //Control de les tecles que es poden prémer
-	bool pressQ = true, pressW = true, pressE = false, pressR = false;
-        bool pressU = false, pressI = false, pressO = false, pressP = false;
+	bool pressQ = true, pressW = true, pressE = true, pressR = true;
+        bool pressU = true, pressI = true, pressO = true, pressP = true;
         
+        //Control dels carrils per els quals poden apareixer notes
         bool canQ, canW, canE, canR, canU, canI, canO, canP;
         
         bool exitLoop = false;
 	
 
     	sf::SoundBuffer buffer1, buffer2, buffer3, buffer4;
-		sf::Sound soundQ;
+            sf::Sound soundQ;
 		buffer1.loadFromFile("./resources/music/1.ogg");
 		soundQ.setBuffer(buffer1);	
-		sf::Sound soundW;
+            sf::Sound soundW;
 		buffer2.loadFromFile("./resources/music/2.ogg");
 		soundW.setBuffer(buffer2);
-		sf::Sound soundE;
+            sf::Sound soundE;
 		buffer3.loadFromFile("./resources/music/3.ogg");
 		soundE.setBuffer(buffer3);
-		sf::Sound soundR;
+            sf::Sound soundR;
 		buffer4.loadFromFile("./resources/music/4.ogg");
 		soundR.setBuffer(buffer4);
 
@@ -116,8 +119,8 @@ void Game::play(){
                     time = clock.restart();
                     musica.newNota();
                 }
-                if  (clock.getElapsedTime().asSeconds() >= musica2.getTempo()) {
-                    time = clock.restart();
+                if  (clock2.getElapsedTime().asSeconds() >= musica2.getTempo()) {
+                    time2 = clock2.restart();
                     musica2.newNota();
                 }
                 
@@ -310,85 +313,100 @@ void Game::play(){
                         falladas++;
                         multiplicador = 1;
                 }
-                std::list<Nota>::iterator it = musica.listNotes.begin();
+
 
                 if (falladas > oldFalladas) spx = 1280;
-                
+                player.setTextureRect(sf::IntRect(spx,0,320,320));
+                _myWindow->draw(player);
             }
-
-            player.setTextureRect(sf::IntRect(spx,0,320,320));
-            _myWindow->draw(player);
 =======
-		while (it != musica.listNotes.end()){
-			spriteNota.setTextureRect(sf::IntRect(((*it).getType()-1)*80,120,80,80));
-			spriteNota.setPosition(sf::Vector2f((*it).getPos().x + ((*it).getType()-1)*100, (*it).getPos().y));
-            _myWindow->draw(spriteNota);
-            it++;
-        }
-		sf::Font font;
-	    if (!font.loadFromFile("./resources/OpenSans-Regular.ttf")) std::cout << "Failed to load font" << std::endl;
-	    sf::Text scoreText("Score: " + to_string(mana),font,50);
-	    scoreText.setColor(sf::Color(255,255,255));
-	    scoreText.setPosition(250, 60);
-        _myWindow->draw(scoreText);
 
-        sf::Text multiplierText("x", font, 50);
-       	multiplierText.setColor(sf::Color(105,105,105));
-       	multiplierText.setPosition(1820, 1020);
-       	_myWindow->draw(multiplierText);
-
-       sf::Sprite hBRectangle;
+            std::list<Nota>::iterator it = musica.listNotes.begin();
+            std::list<Nota>::iterator it2 = musica2.listNotes.begin();
+            
+            while (it != musica.listNotes.end()){ //Draw notes QWER
+                spriteNota.setTextureRect(sf::IntRect(((*it).getType()-1)*80,120,80,80));
+                spriteNota.setPosition(sf::Vector2f((*it).getPos().x + ((*it).getType()-1)*100, (*it).getPos().y));
+                _myWindow->draw(spriteNota);
+                it++;
+            }
+            while (it2 != musica2.listNotes.end()){ //Draw notes UIOP
+                spriteNota.setTextureRect(sf::IntRect(((*it).getType()-1)*80,120,80,80));
+                spriteNota.setPosition(sf::Vector2f((*it).getPos().x + ((*it).getType()-1)*100, (*it).getPos().y));
+                _myWindow->draw(spriteNota);
+                it++;
+            }
+                
+                
+            sf::Sprite hBRectangle;                 //Draw zone QWER
 		hBRectangle.setTexture(notaT);
 		hBRectangle.setTextureRect(sf::IntRect(0,0,420,120));
 		hBRectangle.setPosition(posRectangle);
+                _myWindow->draw(hBRectangle);
+            sf::Sprite hBRectangle2;                //Draw zone UIOP
+		hBRectangle2.setTexture(notaT);
+		hBRectangle2.setTextureRect(sf::IntRect(0,0,420,120));
+		hBRectangle2.setPosition(posRectangle2);
+                _myWindow->draw(hBRectangle2);
+            
+            
+            
+                
+            sf::Font font;
+                if (!font.loadFromFile("./resources/OpenSans-Regular.ttf")) std::cout << "Failed to load font" << std::endl;
+            sf::Text scoreText("Score: " + to_string(mana),font,50);
+                scoreText.setColor(sf::Color(255,255,255));
+                scoreText.setPosition(250, 60);
+                _myWindow->draw(scoreText);
 
-       	sf::Text numberMultiplier(to_string(multiplicador), font, 70);
-       	numberMultiplier.setPosition(1850, 1000);
-       	switch (multiplicador) {
-       		case 2:
-       			numberMultiplier.setColor(sf::Color(0,0,204));
-       			hBRectangle.setColor(sf::Color(0,0,204));
-       			break;
-       		case 3:
-				numberMultiplier.setColor(sf::Color(128,255,0));
-       			hBRectangle.setColor(sf::Color(128,255,0));
-				break;
-       		case 4:
-   				numberMultiplier.setColor(sf::Color(0,51,0));
-       			hBRectangle.setColor(sf::Color(0,51,0));
-   				break;
-       		case 5:
-       			numberMultiplier.setColor(sf::Color(204,0,204));
-       			hBRectangle.setColor(sf::Color(204,0,204));
-       			break;
-       		case 6:	
-       			numberMultiplier.setColor(sf::Color(255,0,0));
-       			hBRectangle.setColor(sf::Color(255,0,0));
-       			break;
-       	}
-       	_myWindow->draw(numberMultiplier);
+            sf::Text multiplierText("x", font, 50);
+                multiplierText.setColor(sf::Color(105,105,105));
+                multiplierText.setPosition(1820, 1020);
+                _myWindow->draw(multiplierText);
 
+            sf::Text numberMultiplier(to_string(multiplicador), font, 70);
+                numberMultiplier.setPosition(1850, 1000);
+                switch (multiplicador) {
+                    case 2:
+                        numberMultiplier.setColor(sf::Color(0,0,204));
+                        hBRectangle.setColor(sf::Color(0,0,204));
+                        break;
+                    case 3:
+                        numberMultiplier.setColor(sf::Color(128,255,0));
+                        hBRectangle.setColor(sf::Color(128,255,0));
+                        break;
+                    case 4:
+                        numberMultiplier.setColor(sf::Color(0,51,0));
+                        hBRectangle.setColor(sf::Color(0,51,0));
+                        break;
+                    case 5:
+                        numberMultiplier.setColor(sf::Color(204,0,204));
+                        hBRectangle.setColor(sf::Color(204,0,204));
+                        break;
+                    case 6:	
+                        numberMultiplier.setColor(sf::Color(255,0,0));
+                        hBRectangle.setColor(sf::Color(255,0,0));
+                        break;
+                }
+                _myWindow->draw(numberMultiplier);
 
-       	sf::Text rachaText(to_string(racha), font, 50);
-       	rachaText.setColor(sf::Color(255,255,255));
-       	rachaText.setPosition(750, 60);
-       	_myWindow->draw(rachaText);
+            sf::Text rachaText(to_string(racha), font, 50);
+                rachaText.setColor(sf::Color(255,255,255));
+                rachaText.setPosition(750, 60);
+                _myWindow->draw(rachaText);
 
-		monjo.regHp();
-		sf::Time elapsed_t = GameTime.getElapsedTime();
-		monjo.update(elapsed_t.asSeconds());
+            monjo.regHp();
+            sf::Time elapsed_t = GameTime.getElapsedTime();
+            monjo.update(elapsed_t.asSeconds());
 
+            hp2.setSize(sf::Vector2f(maxim(0,((float)monjo.getHp()/100.0f)*W_WIDTH/3),20));
 
-
+            _myWindow->draw(hp1);
+            _myWindow->draw(hp2);
+            _myWindow->display();
 		
-		_myWindow->draw(hBRectangle);
-		hp2.setSize(sf::Vector2f(maxim(0,((float)monjo.getHp()/100.0f)*W_WIDTH/3),20));
-
-		_myWindow->draw(hp1);
-		_myWindow->draw(hp2);
-		_myWindow->display();
-		
-		musica.setTempo(vel[((monjo.getLvlConc()-1)/25)%10]);
+            musica.setTempo(vel[((monjo.getLvlConc()-1)/25)%10]);
+            musica2.setTempo(vel[((monjo.getLvlConc()-1)/25)%10]);
 
             ////puntuacuiones
             if(racha>max_combo) max_combo=racha;
