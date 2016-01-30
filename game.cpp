@@ -1,6 +1,6 @@
 #include "utils.hpp"
 
-Game::Game(sf::RenderWindow* window){
+Game::Game(sf::RenderWindow* window):_mywindow(window){
 	
 	//jugador;
 	//musica;
