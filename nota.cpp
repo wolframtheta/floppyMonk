@@ -37,7 +37,7 @@ void Nota::update(){
 
 bool Nota::fora(){
 	
-	return (spr.getPosition().y >580);
+	return (spr.getPosition().y > W_HEIGHT);
 	
 }
 
