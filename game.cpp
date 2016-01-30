@@ -30,7 +30,7 @@ void Game::play(){
 			musica.newNota();
 		}
 		
-		jugador.update();
+		jugador.update(_myWindow);
 		
 		
 		bool encert = false;
