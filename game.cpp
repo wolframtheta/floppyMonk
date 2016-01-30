@@ -3,9 +3,7 @@
 Game::Game(sf::RenderWindow* window): _myWindow(window){
 	
 	
-	sf::Texture bgT;
-	if (!bgT.loadFromFile(file_bg)) std::cout << "Error loading spriteSheet" << std::endl;
-    bg.setTexture(bgT);
+	
 	//bg.setTextureRect(a,b,c,d); falta posar les dimensions del rectangle aka REKT!!
 
 }
@@ -16,7 +14,17 @@ void Game::play(){
 		//frequencia entre notes
 	float tempo = musica.getTempo();
 	
-	Monjo jugador;
+        sf::Texture bgT;
+	if (!bgT.loadFromFile(file_bg)) std::cout << "Error loading spriteSheet" << std::endl;
+        bg.setTexture(bgT);
+        
+        
+        
+	Monjo monjo;
+        sf::Sprite player;
+        sf::Texture monjoT;
+        if (!monjoT.loadFromFile(file_monjo)) std::cout << "Failed to load monjo" << std::endl;
+        player.setTexture(monjoT);
 	
 	//creem el rellotge del joc
 	sf::Clock clock;
@@ -24,7 +32,7 @@ void Game::play(){
 	bool pressQ = true, pressW = true, pressE = true, pressR = true;
         bool exitLoop = false;
 	
-	while(jugador.getLvlConc() > 0 and not exitLoop){ //Player alive
+	while(monjo.getLvlConc() > 0 and not exitLoop){ //Player alive
 		
                 sf::Event event;
                 while (_myWindow->pollEvent(event)){
@@ -46,7 +54,9 @@ void Game::play(){
 		//	musica.newNota();
 		//}
 		
-		jugador.update(_myWindow);
+		monjo.update();
+                player.setPosition(monjo.getPos());
+                _myWindow->draw(player);
 		
 		bool encert = false;
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q) and pressQ){
@@ -56,7 +66,7 @@ void Game::play(){
 		else if (not sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) pressQ = true;
 		
 		//if (not encert) jugador.downLvlConc(false);
-		//else jugador.upLvlConc();
+		//else monjo.upLvlConc();
 		
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) and pressW){
 			encert = musica.encertaNota(2);
@@ -65,7 +75,7 @@ void Game::play(){
 		else if (not sf::Keyboard::isKeyPressed(sf::Keyboard::W)) pressW = true;
 				
 		//if (not encert) jugador.downLvlConc(false);
-		//else jugador.upLvlConc();
+		//else monjo.upLvlConc();
 		
 		   
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::E) and pressE){
@@ -75,7 +85,7 @@ void Game::play(){
 		else if (not sf::Keyboard::isKeyPressed(sf::Keyboard::E)) pressE = true;
 		
 		//if (not encert) jugador.downLvlConc(false);
-		//else jugador.upLvlConc();
+		//else monjo.upLvlConc();
 				   
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::R) and pressR){
 			encert = musica.encertaNota(4);
@@ -85,11 +95,11 @@ void Game::play(){
 		
 
 		//if (not encert) jugador.downLvlConc(false);
-		//else jugador.upLvlConc();
+		//else monjo.upLvlConc();
 		
 		bool notaPerduda = false;
 		notaPerduda = musica.update();
-		if (notaPerduda) jugador.downLvlConc(true);
+		if (notaPerduda) monjo.downLvlConc(true);
 		
 		
 		

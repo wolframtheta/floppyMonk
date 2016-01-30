@@ -12,11 +12,13 @@ public:
     void upLvlConc();
     void downLvlConc(bool b);
     int getLvlConc();
-    void update(sf::RenderWindow* window);
+    void update();
+    sf::Vector2f getPos();
     
 private:
-	
-    sf::RectangleShape spr;
+    
+    sf::Vector2f pos;
+    //sf::Sprite spr;
     int lvlConc;
 
 

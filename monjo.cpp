@@ -1,15 +1,17 @@
 #include "utils.hpp"
 
 Monjo::Monjo() {
-	
-    //spr.setTexture(spriteSheet);
-	//spr.setTextureRect(a,b,c,d); falta posar les dimensions del rectangle aka REKT!!
-	spr.setSize(sf::Vector2f(150,100));
-	spr.setFillColor(sf::Color(0,0,0));
-	
-	
+
+    /*sf::Texture monjoT;
+    if (!monjoT.loadFromFile(file_monjo)) std::cout << "Failed to load monjo" << std::endl;
+    spr.setTexture(monjoT);
+    spr.setOrigin(160,160);
+    spr.setPosition(//W_WIDTH/2,W_HEIGHT*2/3);
+    */
     lvlConc = 1;
-	spr.setPosition(W_WIDTH/2,W_HEIGHT*2/3);
+    pos.x = W_WIDTH/3;
+    pos.y = 300; //NEEDS TO CHANGE
+
 }
 
 void Monjo::upLvlConc() {
@@ -27,9 +29,15 @@ int Monjo::getLvlConc() {
     return lvlConc;
 }
 
-void Monjo::update(sf::RenderWindow* window){
+void Monjo::update(){
 	
-	window->draw(spr);
+	//window->draw(spr);
 	
 	
+}
+
+sf::Vector2f Monjo::getPos(){
+    
+    return pos;
+    
 }
