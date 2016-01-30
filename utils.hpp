@@ -35,5 +35,7 @@
 
 static const char* file_monjo = "./resources/finish_monk_green.png";
 static const char* file_bg = "./resources/Img_T_Game.jpg";
+static const char* file_tile="./resources/sprite.png";
+
 
 #endif // UTILS_HPP
