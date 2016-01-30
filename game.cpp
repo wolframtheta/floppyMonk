@@ -35,6 +35,7 @@ void Game::play(){
 	bool pressQ = true, pressW = true, pressE = true, pressR = true;
         bool exitLoop = false;
 	
+		
 	while(monjo.getLvlConc() > 0 and not exitLoop){ //Player alive
 		
                 sf::Event event;
@@ -55,14 +56,31 @@ void Game::play(){
 		if  (clock.getElapsedTime().asSeconds() >= tempo) {
 			time = clock.restart();
 			musica.newNota();
-		//}
+		}
 		
 		monjo.update();
                 player.setPosition(monjo.getPos());
                 _myWindow->draw(player);
 		
 		bool encert = false;
+
+		/*sf::SoundBuffer buffer;
+		sf::Sound soundQ;
+		buffer.loadFromFile("./resources/music/39194__jobro__piano-ff-046.wav");
+		soundQ.setBuffer(buffer);
+		sf::Sound soundW;
+		buffer.loadFromFile("./resources/music/39194__jobro__piano-ff-047.wav");
+		soundW.setBuffer(buffer);
+		sf::Sound soundE;
+		buffer.loadFromFile("./resources/music/39194__jobro__piano-ff-048.wav");
+		soundE.setBuffer(buffer);
+		sf::Sound soundR;
+		buffer.loadFromFile("./resources/music/39194__jobro__piano-ff-049.wav");
+		soundR.setBuffer(buffer);*/
+
+
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q) and pressQ){
+			//soundQ.play();
 			encert = musica.encertaNota(1);
 			pressQ = false;
 		}
@@ -72,6 +90,7 @@ void Game::play(){
 		//else monjo.upLvlConc();
 		
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) and pressW){
+			//soundW.play();
 			encert = musica.encertaNota(2);
 			pressW = false;
 		}
@@ -82,6 +101,7 @@ void Game::play(){
 		
 		   
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::E) and pressE){
+			//soundE.play();
 			encert = musica.encertaNota(3);
 			pressE = false;
 		}
@@ -91,6 +111,7 @@ void Game::play(){
 		//else monjo.upLvlConc();
 				   
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::R) and pressR){
+			//soundR.play();
 			encert = musica.encertaNota(4);
 			pressR = false;
 		}
@@ -103,9 +124,9 @@ void Game::play(){
 		bool notaPerduda = false;
 		notaPerduda = musica.update();
 		if (notaPerduda) monjo.downLvlConc(true);
-		std::list<Nota>::iterator it = musica.begin();
-		while (it != musica.end()){
-                    spriteNota.setPosition((*it).getPosition);
+		std::list<Nota>::iterator it = musica.listNotes.begin();
+		while (it != musica.listNotes.end()){
+                    spriteNota.setPosition((*it).getPosition());
                     _myWindow->draw(spriteNota);
                     it++;
                 }

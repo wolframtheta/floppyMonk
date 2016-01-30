@@ -14,7 +14,7 @@ public:
 	bool encert(sf::IntRect);
 	int getType();
     //void playmusic(); fer sonar la nota
-        
+	sf::Vector2f getPosition();
 private:
     
 	// 1 = q    2 = w   3 = e   4 = r

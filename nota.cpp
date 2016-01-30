@@ -53,3 +53,7 @@ int Nota::getType(){
 	return type;
 	
 }
+
+sf::Vector2f Nota::getPosition() {
+	return spr.getPosition();
+}

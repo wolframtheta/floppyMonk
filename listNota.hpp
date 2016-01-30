@@ -10,9 +10,9 @@ public:
 	float getTempo();
 	bool update();
 	bool encertaNota(int);
+	std::list<Nota> listNotes;
 
 private:
-	std::list<Nota> listNotes;
 	
 	//el tempo conta segons entre notes
 	float tempo;
