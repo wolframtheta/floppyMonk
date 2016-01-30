@@ -117,16 +117,14 @@ void Game::play(){
 			soundQ.play();
 			encert = musica.encertaNota(1);
 			pressQ = false;
-			if (not encert)
-			{
+			if (not encert) {
 				monjo.downLvlConc(false);
 				racha=0;
 				falladas++;
 				multiplicador=1;
-
+				//wrongTile();
 			}
-			else 
-			{
+			else {
 				monjo.upLvlConc();
 				racha++;
 				acertadas++;
@@ -141,16 +139,14 @@ void Game::play(){
 			soundW.play();
 			encert = musica.encertaNota(2);
 			pressW = false;
-			if (not encert)
-			{
+			if (not encert){
 				monjo.downLvlConc(false);
 				racha=0;
 				falladas++;
 				multiplicador=1;
 
 			}
-			else 
-			{
+			else {
 				monjo.upLvlConc();
 				racha++;
 				acertadas++;
@@ -166,16 +162,14 @@ void Game::play(){
 			soundE.play();
 			encert = musica.encertaNota(3);
 			pressE = false;
-			if (not encert)
-			{
+			if (not encert){
 				monjo.downLvlConc(false);
 				racha=0;
 				falladas++;
 				multiplicador=1;
 
 			}
-			else 
-			{
+			else {
 				monjo.upLvlConc();
 				racha++;
 				acertadas++;
@@ -190,16 +184,14 @@ void Game::play(){
 			soundR.play();
 			encert = musica.encertaNota(4);
 			pressR = false;
-			if (not encert)
-			{
+			if (not encert) {
 				monjo.downLvlConc(false);
 				racha=0;
 				falladas++;
 				multiplicador=1;
 
 			}
-			else 
-			{
+			else {
 				monjo.upLvlConc();
 				racha++;
 				acertadas++;
@@ -229,15 +221,8 @@ void Game::play(){
 
 
 		while (it != musica.listNotes.end()){
-                 
-
-
-
 			spriteNota.setTextureRect(sf::IntRect(((*it).getType()-1)*80,120,80,80));
-
 			spriteNota.setPosition(sf::Vector2f((*it).getPos().x + ((*it).getType()-1)*100, (*it).getPos().y));
-
-			
             _myWindow->draw(spriteNota);
             it++;
         }
@@ -253,23 +238,33 @@ void Game::play(){
        	multiplierText.setPosition(1820, 1020);
        	_myWindow->draw(multiplierText);
 
+       sf::Sprite hBRectangle;
+		hBRectangle.setTexture(notaT);
+		hBRectangle.setTextureRect(sf::IntRect(0,0,420,120));
+		hBRectangle.setPosition(posRectangle);
+
        	sf::Text numberMultiplier(to_string(multiplicador), font, 70);
        	numberMultiplier.setPosition(1850, 1000);
        	switch (multiplicador) {
        		case 2:
        			numberMultiplier.setColor(sf::Color(0,0,204));
+       			hBRectangle.setColor(sf::Color(0,0,204));
        			break;
        		case 3:
 				numberMultiplier.setColor(sf::Color(128,255,0));
+       			hBRectangle.setColor(sf::Color(128,255,0));
 				break;
        		case 4:
    				numberMultiplier.setColor(sf::Color(0,51,0));
+       			hBRectangle.setColor(sf::Color(0,51,0));
    				break;
        		case 5:
        			numberMultiplier.setColor(sf::Color(204,0,204));
+       			hBRectangle.setColor(sf::Color(204,0,204));
        			break;
        		case 6:	
        			numberMultiplier.setColor(sf::Color(255,0,0));
+       			hBRectangle.setColor(sf::Color(255,0,0));
        			break;
        	}
        	_myWindow->draw(numberMultiplier);
@@ -286,10 +281,7 @@ void Game::play(){
 
 
 
-		sf::Sprite hBRectangle;
-		hBRectangle.setTexture(notaT);
-		hBRectangle.setTextureRect(sf::IntRect(0,0,420,120));
-		hBRectangle.setPosition(posRectangle);
+		
 		_myWindow->draw(hBRectangle);
 		hp2.setSize(sf::Vector2f(maxim(0,((float)monjo.getHp()/100.0f)*W_WIDTH/3),20));
 
