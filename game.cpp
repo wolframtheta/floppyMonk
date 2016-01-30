@@ -10,15 +10,9 @@ Game::Game(sf::RenderWindow* window): _myWindow(window){
 
 void Game::play(){
 	
-	listNota musica;
-		//frequencia entre notes
-	float tempo = musica.getTempo();
-	
         sf::Texture bgT;
 	if (!bgT.loadFromFile(file_bg)) std::cout << "Error loading spriteSheet" << std::endl;
         bg.setTexture(bgT);
-        
-        
         
 	Monjo monjo;
         sf::Sprite player;
@@ -26,6 +20,15 @@ void Game::play(){
         if (!monjoT.loadFromFile(file_monjo)) std::cout << "Failed to load monjo" << std::endl;
         player.setTexture(monjoT);
 	
+        
+        listNota musica;
+        //frequencia entre notes
+	float tempo = musica.getTempo();
+        sf::Sprite spriteNota;
+        sf::Texture notaT;
+        if (!notaT.loadFromFile(file_tile)) std::cout << "Failed to load nota" << std::endl;
+        spriteNota.setTexture(notaT);
+        
 	//creem el rellotge del joc
 	sf::Clock clock;
 	sf::Time time = sf::seconds(0);
@@ -49,9 +52,9 @@ void Game::play(){
 		_myWindow->draw(bg);
 		
 		
-		//if  (clock.getElapsedTime().asSeconds() >= tempo) {
-		//	time = clock.restart();
-		//	musica.newNota();
+		if  (clock.getElapsedTime().asSeconds() >= tempo) {
+			time = clock.restart();
+			musica.newNota();
 		//}
 		
 		monjo.update();
@@ -100,8 +103,12 @@ void Game::play(){
 		bool notaPerduda = false;
 		notaPerduda = musica.update();
 		if (notaPerduda) monjo.downLvlConc(true);
-		
-		
+		std::list<Nota>::iterator it = musica.begin();
+		while (it != musica.end()){
+                    spriteNota.setPosition((*it).getPosition);
+                    _myWindow->draw(spriteNota);
+                    it++;
+                }
 		
 		_myWindow->display();
 		
