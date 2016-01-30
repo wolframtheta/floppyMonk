@@ -15,22 +15,22 @@ void Menu::run(){
     
     sf::RectangleShape play;
     play.setFillColor(sf::Color(255,255,255));
-    play.setSize(sf::Vector2f(150,50));
-    play.setPosition(20,20);
-    sf::IntRect Rplay(20,20,150,50);
+    play.setSize(sf::Vector2f(W_WIDTH/3,W_HEIGHT/7));
+    play.setPosition(W_WIDTH/2,W_HEIGHT*1/5);
+    sf::IntRect Rplay(W_WIDTH/2,W_HEIGHT*1/5,W_WIDTH/3,W_HEIGHT/7);
     
     sf::RectangleShape credits;
     credits.setFillColor(sf::Color(255,255,255));
-    credits.setSize(sf::Vector2f(150,50));
-    credits.setPosition(W_WIDTH/2,90);
-    sf::IntRect Rcred(20,90,150,50);
+    credits.setSize(sf::Vector2f(W_WIDTH/3,W_HEIGHT/7));
+    credits.setPosition(W_WIDTH/2,W_HEIGHT*2/5);
+    sf::IntRect Rcred(W_WIDTH/2,W_HEIGHT*2/5,W_WIDTH/3,W_HEIGHT/7);
     
     
     sf::RectangleShape exit;
     exit.setFillColor(sf::Color(255,255,255));
-    exit.setSize(sf::Vector2f(150,50));
-    exit.setPosition(20,160);
-    sf::IntRect Rexit(20,160,150,50);
+    exit.setSize(sf::Vector2f(W_WIDTH/3,W_HEIGHT/7));
+    exit.setPosition(W_WIDTH/2,W_HEIGHT*3/5);
+    sf::IntRect Rexit(W_WIDTH/2,W_HEIGHT*3/5,W_WIDTH/3,W_HEIGHT/7);
     
     
     
@@ -94,9 +94,9 @@ void Menu::run(){
                         
                     }
                     
-                    play.setPosition(20,20);
-                    credits.setPosition(20,90);
-                    exit.setPosition(20,160);
+                    play.setPosition(W_WIDTH/2,W_HEIGHT*1/5);
+                    credits.setPosition(W_WIDTH/2,W_HEIGHT*2/5);
+                    exit.setPosition(W_WIDTH/2,W_HEIGHT*3/5);
                     //Display buttons
                 }
                 else if (cursorAim.intersects(Rexit)){
