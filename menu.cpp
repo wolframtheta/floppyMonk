@@ -3,7 +3,7 @@
 void Menu::run(){
     
     sf::RenderWindow window(sf::VideoMode(W_WIDTH, W_HEIGHT), APP_NAME);
-    
+    window.setFramerateLimit(60);
     //sf::Texture spriteSheet;
     //if (!spriteSheet.loadFromFile("./images/spriteSheet.jpg")) std::cout << "Error loading spriteSheet" << std::endl;
     
