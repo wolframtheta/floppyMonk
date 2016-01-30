@@ -5,13 +5,30 @@ listNota::listNota(float tempo) {
 }
 
 void listNota::newNota() {
-	std::list<Nota>::iterator it;
-	it = listNotas.end();
 	Nota nota(rand() % 4 +1);
-	it.insert(nota);
+	listNotes.push_back(nota);
 }
 
 
 float listNota::getTempo(){
 	return tempo;
+}
+
+bool listNota::update(){
+	
+	bool notaPerduda = false;
+	
+	std::list<Nota>::iterator it = listNotes.begin();
+	while (it != listNotes.end()){
+		(*it).update();
+		if ((*it).fora()){
+			(*it).erase;
+			it--;
+			notaPerduda = true;
+		}
+	}
+	
+	//Play background music
+	
+	return notaPerduda;
 }

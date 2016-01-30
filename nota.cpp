@@ -13,9 +13,24 @@ Nota::Nota(int nota){
 	//spr.setTextureRect(a,b,c,d); falta posar les dimensions del rectangle aka REKT!!
 	
 	spr.setPosition(sf::Vector2f((W_WIDTH/5) * type,0));
+	
 }
 
 void Nota::dibuixarNota(sf::RenderWindow* window){
+	
 	spr.move(0,1):
 	window.draw(spr);
+	
+}
+
+void Nota::update(){
+
+	spr.move(0,5);
+
+}
+
+bool Nota::fora(){
+	
+	return (spr.getPosition().y > W_HEIGHT);
+	
 }
