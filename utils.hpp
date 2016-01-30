@@ -29,7 +29,6 @@
 
 
 #define APP_NAME "Floppy Monk"
-using namespace std;
 
 
 static const sf::Texture spriteSheet;

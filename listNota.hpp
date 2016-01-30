@@ -9,7 +9,7 @@ public:
 
 
 private:
-	list<Nota> listNota;
+	std::list<Nota> listNotas;
 	int freq;
 
 };
