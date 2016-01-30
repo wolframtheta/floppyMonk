@@ -23,7 +23,7 @@
 #define W_HEIGHT 600
 #define APP_NAME "Floppy Monk"
 
-static const sf:Texture spriteSheet;
+static const sf::Texture spriteSheet;
 
 
 #endif // UTILS_HPP
