@@ -64,23 +64,22 @@ void Game::play(){
 		
 		bool encert = false;
 
-		/*sf::SoundBuffer buffer;
+		sf::SoundBuffer buffer;
 		sf::Sound soundQ;
-		buffer.loadFromFile("./resources/music/39194__jobro__piano-ff-046.wav");
+		buffer.loadFromFile("./resources/music/46.wav");
 		soundQ.setBuffer(buffer);
 		sf::Sound soundW;
-		buffer.loadFromFile("./resources/music/39194__jobro__piano-ff-047.wav");
+		buffer.loadFromFile("./resources/music/46.wav");
 		soundW.setBuffer(buffer);
 		sf::Sound soundE;
-		buffer.loadFromFile("./resources/music/39194__jobro__piano-ff-048.wav");
+		buffer.loadFromFile("./resources/music/46.wav");
 		soundE.setBuffer(buffer);
 		sf::Sound soundR;
-		buffer.loadFromFile("./resources/music/39194__jobro__piano-ff-049.wav");
-		soundR.setBuffer(buffer);*/
-
+		buffer.loadFromFile("./resources/music/46.wav");
+		soundR.setBuffer(buffer);
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q) and pressQ){
-			//soundQ.play();
+			soundQ.play();
 			encert = musica.encertaNota(1);
 			pressQ = false;
 		}
@@ -90,7 +89,7 @@ void Game::play(){
 		//else monjo.upLvlConc();
 		
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) and pressW){
-			//soundW.play();
+			soundW.play();
 			encert = musica.encertaNota(2);
 			pressW = false;
 		}
@@ -101,7 +100,7 @@ void Game::play(){
 		
 		   
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::E) and pressE){
-			//soundE.play();
+			soundE.play();
 			encert = musica.encertaNota(3);
 			pressE = false;
 		}
@@ -111,7 +110,7 @@ void Game::play(){
 		//else monjo.upLvlConc();
 				   
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::R) and pressR){
-			//soundR.play();
+			soundR.play();
 			encert = musica.encertaNota(4);
 			pressR = false;
 		}

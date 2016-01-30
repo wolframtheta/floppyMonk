@@ -54,11 +54,11 @@ bool listNota::encertaNota(int type){
 		if ((*it).getType() == type){
 			if ((*it).encert(zona)){
 				//(*it).playmusic;			TO DO
-				listNotes.erase(it);
-				it--;
+				listNotes.erase(it--);
 				trobada = true;
 			}
 		}
+		++it;
 	}
 
 	return trobada;
