@@ -10,40 +10,32 @@ Nota::Nota(int nota){
 	type = nota;
 	
 	
-	sf::Texture bgT;
-	if (!bgT.loadFromFile(file_bg)) std::cout << "Error loading spriteSheet" << std::endl;
-    
-	spr.setTexture(bgT);
-	//spr.setTextureRect(a,b,c,d); falta posar les dimensions del rectangle aka REKT!!
-	float posx = 1920-400+20*type+40*(type-1);
-	float posy = -40;
-	spr.setPosition(sf::Vector2f(posx,posy));
+/*	float posx = 1920-400+20*type+40*(type-1);
+	float posy = -40;*/
+	
+	pos.x = 500;
+	pos.y = -40;
 	
 }
 
 Nota::~Nota(){}
 
-void Nota::dibuixarNota(sf::RenderWindow* window){
-	
-	window->draw(spr);
-	
-}
 
 void Nota::update(){
 
-	spr.move(0,5);
+	pos.y+=5;
 
 }
 
 bool Nota::fora(){
 	
-	return (spr.getPosition().y >580);
+	return (pos.y > W_HEIGHT+80);
 	
 }
 
 bool Nota::encert(sf::IntRect zona){
 	
-	sf::IntRect hbNote(spr.getPosition().x,spr.getPosition().y,80,80);
+	sf::IntRect hbNote(pos.x,pos.y,80,80);
 	return (hbNote.intersects(zona));
 	
 }
@@ -54,6 +46,6 @@ int Nota::getType(){
 	
 }
 
-sf::Vector2f Nota::getPosition() {
-	return spr.getPosition();
+sf::Vector2f Nota::getPos() {
+	return pos;
 }

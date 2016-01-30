@@ -45,12 +45,9 @@ bool listNota::encertaNota(int type){
 	
 	std::list<Nota>::iterator it = listNotes.begin();
 	while (it != listNotes.end() and not trobada){
-		if ((*it).getType() == type){
-			if ((*it).encert(zona)){
-				//(*it).playmusic;			TO DO
+		if ((*it).getType() == type and (*it).encert(zona)){
 				listNotes.erase(it--);
 				trobada = true;
-			}
 		}
 		++it;
 	}
