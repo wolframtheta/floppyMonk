@@ -22,7 +22,7 @@ void Menu::run(){
     sf::RectangleShape credits;
     credits.setFillColor(sf::Color(255,255,255));
     credits.setSize(sf::Vector2f(150,50));
-    credits.setPosition(20,90);
+    credits.setPosition(W_WIDTH/2,90);
     sf::IntRect Rcred(20,90,150,50);
     
     
@@ -69,14 +69,27 @@ void Menu::run(){
                     //Roll credits
                     sf::Font font;
                     if (!font.loadFromFile("./resources/RemachineScript_Personal_Use.ttf")) std::cout << "Failed to load font" << std::endl;
-                    sf::Text creditText("GameJam Barcelona 2016",font,30);
+                    sf::Text creditText("GameJam Barcelona 2016",font,60);
                     creditText.setColor(sf::Color(255,255,255));
                     for (int i = W_HEIGHT;i>0;i--){
+                        
+                        
+                        
                         window.clear();
                         window.draw(bg);
                         
-                        creditText.setPosition((float)W_WIDTH/5,(float)i);
+                        creditText.setPosition((float)W_WIDTH/5,(float)i/2);
                         window.draw(creditText);
+                        
+                        sf::Event event2;
+                        while (window.pollEvent(event2)){
+                            if (event2.type == sf::Event::Closed) i=-1;
+                            if (event2.type == sf::Event::KeyPressed){
+                                if (event2.key.code == sf::Keyboard::Escape){
+                                    i=-1;
+                                }
+                            }
+                        }
                         window.display();
                         
                     }

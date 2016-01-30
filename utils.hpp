@@ -24,8 +24,8 @@
 #include "game.hpp"
 
 
-#define W_WIDTH 400
-#define W_HEIGHT 600
+#define W_WIDTH 1920
+#define W_HEIGHT 1080
 
 
 #define APP_NAME "Floppy Monk"
