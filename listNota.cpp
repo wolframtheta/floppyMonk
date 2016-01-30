@@ -27,3 +27,23 @@ bool listNota::update(){
 	
 	return notaPerduda;
 }
+
+bool listNota::encertaNota(int type){
+	
+	bool trobada = false;
+	
+	std::list<Nota>::iterator it = listNotes.begin();
+	while (it != listNotes.end() and not trobada){
+		if ((*it).getType() == type){
+			if ((*it).encert()){
+				(*it).playmusic;
+				(*it).erase;
+				it--;
+				trobada = true;
+			}
+		}
+	}
+
+	return trobada;
+	
+}

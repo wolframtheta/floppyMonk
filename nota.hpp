@@ -11,7 +11,8 @@ public:
 	void dibuixarNota(sf::RenderWindow* window);
 	void update();
 	bool fora();
-    //fer sonar la nota
+	bool encert(sf::IntRect);
+    //void playmusic(); fer sonar la nota
         
 private:
     
