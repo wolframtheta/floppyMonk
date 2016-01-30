@@ -37,7 +37,7 @@ using namespace std;
 
 static const sf::Vector2f posRectangle = sf::Vector2f(1250, 760);
 
-static const char* file_monjo = "./resources/finish_monk_green1.png";
+static const char* file_monjo = "./resources/MonkSprite320.png";
 static const char* file_bg = "./resources/bg.png";
 static const char* file_tile="./resources/Sprite.png";
 static const char* file_play = "./resources/ButtonPlay.png";

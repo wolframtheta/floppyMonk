@@ -10,9 +10,9 @@ public:
 	//void setSprite(sf::Sprite);
 	
     void upLvlConc();
-    void downLvlConc(bool b);
+    void downLvlConc(bool);
     int getLvlConc();
-    void update(int s);
+    void update(float);
     void healthDown();
     int getHp();
     sf::Vector2f getPos();

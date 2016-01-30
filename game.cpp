@@ -99,10 +99,19 @@ void Game::play(){
 			musica.newNota();
 			
 		}
-		
+				
                 player.setPosition(monjo.getPos());
-                _myWindow->draw(player);
+
+                int spx;
+                if (monjo.getLvlConc() < 62.5) spx = 0;
+                else if (monjo.getLvlConc() < 125) spx = 320;
+                else if (monjo.getLvlConc() < 187.5) spx = 640;
+                else spx = 960;
+
+
 		
+
+		int oldFalladas = falladas;
 		bool encert = false;
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q) and pressQ ){
 			soundQ.play();
@@ -212,7 +221,12 @@ void Game::play(){
 		}
 		std::list<Nota>::iterator it = musica.listNotes.begin();
 
-		
+		if (falladas > oldFalladas) spx = 1280;
+
+        player.setTextureRect(sf::IntRect(spx,0,320,320));
+        _myWindow->draw(player);
+
+
 
 		while (it != musica.listNotes.end()){
                  
@@ -236,11 +250,11 @@ void Game::play(){
 
         sf::Text multiplierText("x", font, 50);
        	multiplierText.setColor(sf::Color(105,105,105));
-       	multiplierText.setPosition(600, 60);
+       	multiplierText.setPosition(1820, 1020);
        	_myWindow->draw(multiplierText);
 
        	sf::Text numberMultiplier(to_string(multiplicador), font, 70);
-       	numberMultiplier.setPosition(630, 50);
+       	numberMultiplier.setPosition(1850, 1000);
        	switch (multiplicador) {
        		case 2:
        			numberMultiplier.setColor(sf::Color(0,0,204));
@@ -269,6 +283,9 @@ void Game::play(){
 		monjo.regHp();
 		sf::Time elapsed_t = GameTime.getElapsedTime();
 		monjo.update(elapsed_t.asSeconds());
+
+
+
 		sf::Sprite hBRectangle;
 		hBRectangle.setTexture(notaT);
 		hBRectangle.setTextureRect(sf::IntRect(0,0,420,120));

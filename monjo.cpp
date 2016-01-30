@@ -45,7 +45,7 @@ int Monjo::getLvlConc() {
 }
 
 //Byte Monjo::posrel = 0;
-void Monjo::update(int s){
+void Monjo::update(float s){
 	
     pos.x=840+20*sin(s);
 	//window->draw(spr);

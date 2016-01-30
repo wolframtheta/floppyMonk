@@ -13,21 +13,33 @@ void Menu::run(){
     bg.setSize(sf::Vector2f(W_WIDTH, W_HEIGHT));
     bg.setPosition(0,0);
     
+    sf::Texture bgPlay;
+    if (!bgPlay.loadFromFile(file_play)) std::cout << "Error loading spriteSheet" << std::endl;
+    
     sf::RectangleShape play;
-    play.setFillColor(sf::Color(255,255,255));
+    play.setTexture(&bgPlay);
     play.setSize(sf::Vector2f(W_WIDTH/3,W_HEIGHT/7));
     play.setPosition(W_WIDTH/2-W_WIDTH/3/2,W_HEIGHT*1/5-W_HEIGHT/7/2);
     sf::IntRect Rplay(W_WIDTH/2-W_WIDTH/3/2,W_HEIGHT*1/5-W_HEIGHT/7/2,W_WIDTH/3,W_HEIGHT/7);
     
+
+    sf::Texture bgCredits;
+    if (!bgCredits.loadFromFile(file_credits)) std::cout << "Error loading spriteSheet" << std::endl;
+    
     sf::RectangleShape credits;
-    credits.setFillColor(sf::Color(255,255,255));
+    credits.setTexture(&bgCredits);
     credits.setSize(sf::Vector2f(W_WIDTH/3,W_HEIGHT/7));
     credits.setPosition(W_WIDTH/2-W_WIDTH/3/2,W_HEIGHT*2/5-W_HEIGHT/7/2);
     sf::IntRect Rcred(W_WIDTH/2-W_WIDTH/3/2,W_HEIGHT*2/5-W_HEIGHT/7/2,W_WIDTH/3,W_HEIGHT/7);
+   
+
+   sf::Texture bgExit;
+    if (!bgExit.loadFromFile(file_exit)) std::cout << "Error loading spriteSheet" << std::endl;
+    
     
     
     sf::RectangleShape exit;
-    exit.setFillColor(sf::Color(255,255,255));
+    exit.setTexture(&bgExit);
     exit.setSize(sf::Vector2f(W_WIDTH/3,W_HEIGHT/7));
     exit.setPosition(W_WIDTH/2-W_WIDTH/3/2,W_HEIGHT*3/5-W_HEIGHT/7/2);
     sf::IntRect Rexit(W_WIDTH/2-W_WIDTH/3/2,W_HEIGHT*3/5-W_HEIGHT/7/2,W_WIDTH/3,W_HEIGHT/7);
@@ -97,7 +109,7 @@ void Menu::run(){
                     //Roll credits
                     sf::Font font;
                     if (!font.loadFromFile("./resources/RemachineScript_Personal_Use.ttf")) std::cout << "Failed to load font" << std::endl;
-                    sf::Text creditText("GameJam Barcelona 2016",font,100);
+                    sf::Text creditText("GameJam Barcelona Dos Mil Setze",font,100);
                     creditText.setColor(sf::Color(255,255,255));
                     for (int i = W_HEIGHT;i>0;i--){
                         
