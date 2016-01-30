@@ -73,7 +73,7 @@ void Menu::run(){
                     exit.setPosition(-500,-500);
 					
                     Game joc(&window);
-					//joc.play();
+					joc.play();
 					
 					
 					play.setPosition(W_WIDTH/2-W_WIDTH/3/2,W_HEIGHT*1/5-W_HEIGHT/7/2);
