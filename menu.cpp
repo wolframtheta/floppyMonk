@@ -31,8 +31,12 @@ void Menu::run(){
     exit.setSize(sf::Vector2f(W_WIDTH/3,W_HEIGHT/7));
     exit.setPosition(W_WIDTH/2-W_WIDTH/3/2,W_HEIGHT*3/5-W_HEIGHT/7/2);
     sf::IntRect Rexit(W_WIDTH/2-W_WIDTH/3/2,W_HEIGHT*3/5-W_HEIGHT/7/2,W_WIDTH/3,W_HEIGHT/7);
-    
-    
+    sf::SoundBuffer buffer;
+        sf::Sound backgroundS;
+        buffer.loadFromFile("./resources/music/BSong.ogg");
+        backgroundS.setBuffer(buffer);
+        backgroundS.play();
+     
     
 
     
