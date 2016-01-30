@@ -2,7 +2,7 @@
 
 void Menu::run(){
     
-    sf::RenderWindow window(sf::VideoMode(W_WIDTH, W_HEIGHT), APP_NAME, sf::Style::Fullscreen);
+    sf::RenderWindow window(sf::VideoMode(W_WIDTH, W_HEIGHT), APP_NAME/*, sf::Style::Fullscreen*/);
     window.setFramerateLimit(60);
     sf::Texture bgT;
     if (!bgT.loadFromFile(file_bg)) std::cout << "Error loading spriteSheet" << std::endl;
@@ -41,11 +41,11 @@ void Menu::run(){
         
         
         sf::Event event;
-        bool fullscreen;
+        /*bool fullscreen;
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return) and sf::Keyboard::isKeyPressed(sf::Keyboard::LAlt)) {
             fullscreen = !fullscreen;
             window.create(sf::VideoMode(W_WIDTH, W_HEIGHT), APP_NAME, (fullscreen ? sf::Style::Fullscreen : sf::Style::Resize|sf::Style::Close));
-        }
+        }*/
         while (window.pollEvent(event)){
 
             //Exit
@@ -68,15 +68,15 @@ void Menu::run(){
                 if (cursorAim.intersects(Rplay)){
                     std::cout << "Play ok!" << std::endl;
 					
-					play.setPosition(-500,-500);
+                    play.setPosition(-500,-500);
                     credits.setPosition(-500,-500);
                     exit.setPosition(-500,-500);
 					
                     Game joc(&window);
-					joc.play();
+                    joc.play();
 					
 					
-					play.setPosition(W_WIDTH/2-W_WIDTH/3/2,W_HEIGHT*1/5-W_HEIGHT/7/2);
+                    play.setPosition(W_WIDTH/2-W_WIDTH/3/2,W_HEIGHT*1/5-W_HEIGHT/7/2);
                     credits.setPosition(W_WIDTH/2-W_WIDTH/3/2,W_HEIGHT*2/5-W_HEIGHT/7/2);
                     exit.setPosition(W_WIDTH/2-W_WIDTH/3/2,W_HEIGHT*3/5-W_HEIGHT/7/2);
                     //Hide buttons
