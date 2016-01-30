@@ -22,17 +22,29 @@ void Game::play(){
 	sf::Clock clock;
 	sf::Time time = sf::seconds(0);
 	bool pressQ = true, pressW = true, pressE = true, pressR = true;
+        bool exitLoop = false;
 	
-	while(jugador.getLvlConc() > 0){
+	while(jugador.getLvlConc() > 0 and not exitLoop){ //Player alive
 		
+                sf::Event event;
+                while (_myWindow->pollEvent(event)){
+                    if (event.type == sf::Event::Closed) exitLoop = true;
+                    if (event.type == sf::Event::KeyPressed){
+                        if (event.key.code == sf::Keyboard::Escape){
+                            exitLoop = true;
+                        }
+                    }    
+                }
+            
+            
 		_myWindow->clear();
 		_myWindow->draw(bg);
 		
 		
-		if  (clock.getElapsedTime().asSeconds() >= tempo) {
-			time = clock.restart();
-			musica.newNota();
-		}
+		//if  (clock.getElapsedTime().asSeconds() >= tempo) {
+		//	time = clock.restart();
+		//	musica.newNota();
+		//}
 		
 		jugador.update(_myWindow);
 		
@@ -71,7 +83,8 @@ void Game::play(){
 		}
 		else if (not sf::Keyboard::isKeyPressed(sf::Keyboard::R)) pressR = true;
 		
-		//f (not encert) jugador.downLvlConc(false);
+
+		//if (not encert) jugador.downLvlConc(false);
 		//else jugador.upLvlConc();
 		
 		bool notaPerduda = false;
@@ -84,7 +97,10 @@ void Game::play(){
 		
 	}
 	
-	
+	if (not exitLoop) { //Player dead
+            
+            //Game over blah blah blah
+        }
 	
 	
 }
