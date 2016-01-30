@@ -1,14 +1,15 @@
 #include "utils.hpp"
 
-listNota::listNota(float tempo) {
-	this.tempo = tempo;
+listNota::listNota(){
+	
+	tempo = 1;
+	
 }
 
 void listNota::newNota() {
 	Nota nota(rand() % 4 +1);
 	listNotes.push_back(nota);
 }
-
 
 float listNota::getTempo(){
 	return tempo;
@@ -41,7 +42,7 @@ bool listNota::encertaNota(int type){
 	while (it != listNotes.end() and not trobada){
 		if ((*it).getType() == type){
 			if ((*it).encert()){
-				(*it).playmusic;
+				//(*it).playmusic;			TO DO
 				(*it).erase;
 				it--;
 				trobada = true;

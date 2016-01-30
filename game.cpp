@@ -18,13 +18,55 @@ void Game::play(){
 	//creem el rellotge del joc
 	sf::Clock clock;
 	sf::Time time = sf::seconds(0);
+	bool pressQ = true, pressW = true, pressE = true, pressR = true;
 	
 	while(jugador.getLvlCon() > 0){
 		if  (clock.getElapsedTime().asSeconds() >= tempo) {
 			time = clock.restart();
 			musica.newNota();
 		}
-		//events
+		
+		bool encert = false;
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q) and pressQ){
+			encert = llistaNotes.encertaNota(1);
+			pressQ = false;
+		}
+		else if (not sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) pressQ = true;
+		
+		if (not encert) jugador.downLvlConc(false);
+		else jugador.upLvlConc();
+		
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) and pressW){
+			encert = llistaNotes.encertaNota(2);
+			pressW = false
+		}
+		else if (not sf::Keyboard::isKeyPressed(sf::Keyboard::W) pressW = true;
+				
+		if (not encert) jugador.downLvlConc(false);
+		else jugador.upLvlConc();
+		
+		   
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::E) and pressE){
+			encert = llistaNotes.encertaNota(3);
+			pressE = false;
+		}
+		else if (not sf::Keyboard::isKeyPressed(sf::Keyboard::E) pressE = true;
+		
+		if (not encert) jugador.downLvlConc(false);
+		else jugador.upLvlConc();
+				   
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::R) and pressR){
+			encert = llistaNotes.encertaNota(4);
+			pressR = false;
+		}
+		else if (not sf::Keyboard::isKeyPressed(sf::Keyboard::R) pressR = true;
+		
+		if (not encert) jugador.downLvlConc(false);
+		else jugador.upLvlConc();
+		
+		bool notaPerduda = false;
+		notaPerduda = musica.update();
+		if (notaPerduda) jugador.downLvlConc(true);
 	}
 	
 }
