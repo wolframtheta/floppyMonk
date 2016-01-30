@@ -1,5 +1,5 @@
 #include "utils.hpp"
-
+#include <cmath>
 Monjo::Monjo() {
 
     /*sf::Texture monjoT;
@@ -45,8 +45,9 @@ int Monjo::getLvlConc() {
 }
 
 //Byte Monjo::posrel = 0;
-void Monjo::update(){
+void Monjo::update(int s){
 	
+    pos.x=840+20*sin(s);
 	//window->draw(spr);
 	//++posrel;//0.1575
 

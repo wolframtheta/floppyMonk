@@ -18,7 +18,9 @@ Nota::Nota(int nota){
 	
 }
 
-Nota::~Nota(){}
+Nota::~Nota(){
+
+}
 
 
 void Nota::update(){
@@ -29,7 +31,7 @@ void Nota::update(){
 
 bool Nota::fora(){
 	
-	return (pos.y > W_HEIGHT+80);
+	return (pos.y > W_HEIGHT);
 	
 }
 

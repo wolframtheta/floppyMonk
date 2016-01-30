@@ -12,7 +12,7 @@ public:
     void upLvlConc();
     void downLvlConc(bool b);
     int getLvlConc();
-    void update();
+    void update(int s);
     void healthDown();
     int getHp();
     sf::Vector2f getPos();

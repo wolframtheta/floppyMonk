@@ -12,6 +12,9 @@
 #include <utility>
 #include <sstream>
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <string>
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
@@ -29,7 +32,7 @@
 
 
 #define APP_NAME "Floppy Monk"
-
+using namespace std;
 
 
 static const sf::Vector2f posRectangle = sf::Vector2f(1250, 760);

@@ -1,7 +1,4 @@
 #include "utils.hpp"
-#include <stdio.h>
-#include <stdlib.h>
-#include <string>
 Game::Game(sf::RenderWindow* window): _myWindow(window){
 	
 	
@@ -31,12 +28,12 @@ void Game::play(){
 
         sf::RectangleShape hp1;
         hp1.setFillColor(sf::Color(171,0,0));
-    	hp1.setSize(sf::Vector2f(W_WIDTH/3,40));
-    	hp1.setPosition(200,30);
+    	hp1.setSize(sf::Vector2f(W_WIDTH/3,20));
+    	hp1.setPosition(200,130);
         sf::RectangleShape hp2;
         hp2.setFillColor(sf::Color(255,0,0));
-    	hp2.setSize(sf::Vector2f(W_WIDTH/3,40));
-    	hp2.setPosition(200,30);
+    	hp2.setSize(sf::Vector2f(W_WIDTH/3,20));
+    	hp2.setPosition(200,130);
     	_myWindow->draw(hp1);
     	_myWindow->draw(hp2);
 
@@ -53,7 +50,6 @@ void Game::play(){
         
         listNota musica;
         //frequencia entre notes
-	float tempo = musica.getTempo();
         sf::Sprite spriteNota;
         sf::Texture notaT;
         if (!notaT.loadFromFile(file_tile)) std::cout << "Failed to load nota" << std::endl;
@@ -69,7 +65,7 @@ void Game::play(){
     	sf::SoundBuffer buffer1, buffer2, buffer3, buffer4;
 		sf::Sound soundQ;
 		buffer1.loadFromFile("./resources/music_n/1.wav");
-		soundQ.setBuffer(buffer1);
+		soundQ.setBuffer(buffer1);	
 		sf::Sound soundW;
 		buffer2.loadFromFile("./resources/music_n/2.wav");
 		soundW.setBuffer(buffer2);
@@ -98,13 +94,12 @@ void Game::play(){
 		_myWindow->draw(bg);
 		
 		
-		if  (clock.getElapsedTime().asSeconds() >= tempo) {
+		if  (clock.getElapsedTime().asSeconds() >= musica.getTempo()) {
 			time = clock.restart();
 			musica.newNota();
 			
 		}
 		
-		monjo.update();
                 player.setPosition(monjo.getPos());
                 _myWindow->draw(player);
 		
@@ -117,7 +112,7 @@ void Game::play(){
 			{
 				monjo.downLvlConc(false);
 				racha=0;
-				falladas--;
+				falladas++;
 				multiplicador=1;
 
 			}
@@ -141,7 +136,7 @@ void Game::play(){
 			{
 				monjo.downLvlConc(false);
 				racha=0;
-				falladas--;
+				falladas++;
 				multiplicador=1;
 
 			}
@@ -166,7 +161,7 @@ void Game::play(){
 			{
 				monjo.downLvlConc(false);
 				racha=0;
-				falladas--;
+				falladas++;
 				multiplicador=1;
 
 			}
@@ -190,7 +185,7 @@ void Game::play(){
 			{
 				monjo.downLvlConc(false);
 				racha=0;
-				falladas--;
+				falladas++;
 				multiplicador=1;
 
 			}
@@ -209,7 +204,12 @@ void Game::play(){
 
 		bool notaPerduda = false;
 		notaPerduda = musica.update();
-		if (notaPerduda) monjo.downLvlConc(true);
+		if (notaPerduda) {
+			monjo.downLvlConc(true);
+			racha = 0;
+			falladas++;
+			multiplicador = 1;
+		}
 		std::list<Nota>::iterator it = musica.listNotes.begin();
 
 		
@@ -227,20 +227,60 @@ void Game::play(){
             _myWindow->draw(spriteNota);
             it++;
         }
+		sf::Font font;
+	    if (!font.loadFromFile("./resources/OpenSans-Regular.ttf")) std::cout << "Failed to load font" << std::endl;
+	    sf::Text scoreText("Score: " + to_string(mana),font,50);
+	    scoreText.setColor(sf::Color(255,255,255));
+	    scoreText.setPosition(250, 60);
+        _myWindow->draw(scoreText);
+
+        sf::Text multiplierText("x", font, 50);
+       	multiplierText.setColor(sf::Color(105,105,105));
+       	multiplierText.setPosition(600, 60);
+       	_myWindow->draw(multiplierText);
+
+       	sf::Text numberMultiplier(to_string(multiplicador), font, 70);
+       	numberMultiplier.setPosition(630, 50);
+       	switch (multiplicador) {
+       		case 2:
+       			numberMultiplier.setColor(sf::Color(0,0,204));
+       			break;
+       		case 3:
+				numberMultiplier.setColor(sf::Color(128,255,0));
+				break;
+       		case 4:
+   				numberMultiplier.setColor(sf::Color(0,51,0));
+   				break;
+       		case 5:
+       			numberMultiplier.setColor(sf::Color(204,0,204));
+       			break;
+       		case 6:	
+       			numberMultiplier.setColor(sf::Color(255,0,0));
+       			break;
+       	}
+       	_myWindow->draw(numberMultiplier);
+
+
+       	sf::Text rachaText(to_string(racha), font, 50);
+       	rachaText.setColor(sf::Color(255,255,255));
+       	rachaText.setPosition(750, 60);
+       	_myWindow->draw(rachaText);
+
 		monjo.regHp();
+		sf::Time elapsed_t = GameTime.getElapsedTime();
+		monjo.update(elapsed_t.asSeconds());
 		sf::Sprite hBRectangle;
 		hBRectangle.setTexture(notaT);
 		hBRectangle.setTextureRect(sf::IntRect(0,0,420,120));
 		hBRectangle.setPosition(posRectangle);
 		_myWindow->draw(hBRectangle);
-		hp2.setSize(sf::Vector2f(maxim(0,((float)monjo.getHp()/100.0f)*W_WIDTH/3),40));
+		hp2.setSize(sf::Vector2f(maxim(0,((float)monjo.getHp()/100.0f)*W_WIDTH/3),20));
 
 		_myWindow->draw(hp1);
 		_myWindow->draw(hp2);
 		_myWindow->display();
 		
-		musica.setTempo(vel[(monjo.getLvlConc()-1)/25]);
-		std::cout<<musica.getTempo()<<std::endl;
+		musica.setTempo(vel[((monjo.getLvlConc()-1)/25)%10]);
 
 
 		////puntuacuiones
@@ -257,9 +297,34 @@ void Game::play(){
 
 	
 	if (not exitLoop) { //Player dead
-            
+
+sf::Time elapsed_t = GameTime.getElapsedTime();
+		sf::Font font;
+	    if (!font.loadFromFile("./resources/OpenSans-Regular.ttf")) std::cout << "Failed to load font" << std::endl;
+		sf::RectangleShape scoreBoard;
+	 	scoreBoard.setFillColor(sf::Color(0,0,0,128));
+    	scoreBoard.setSize(sf::Vector2f(800,600));
+    	scoreBoard.setPosition(W_WIDTH/2 - 400,W_HEIGHT/2 - 300);
+
+        _myWindow->draw(scoreBoard);
+
+		string text = "Score points - " + to_string(mana) 
+		+ "\n\nRacha maxima - " + to_string(max_combo) 
+		+ "\n\n# aciertos - " + to_string(acertadas) 
+		+ "\n\n# fallos - " + to_string(falladas)  
+		+ "\n\nTiempo - " + to_string((int) ((elapsed_t.asSeconds() - 0.5)+1))
+		+ "segundos\n\n                                               PRESS RETURN TO EXIT";
+		sf::Text scoreText(text, font, 20);
+		scoreText.setColor(sf::Color(255,255,255));
+		scoreText.setPosition(sf::Vector2f(scoreBoard.getPosition().x + 70, scoreBoard.getPosition().y +20));
+		_myWindow->draw(scoreText);
+
+		_myWindow->display();
+			while(not sf::Keyboard::isKeyPressed(sf::Keyboard::Return)) ;
+           
             std::cout<<"DEAD"<<std::endl;
+
         }
-	
+
 	
 }
