@@ -60,7 +60,6 @@ void Game::play(){
                     }    
                 }
             
-            
 		_myWindow->clear();
 		_myWindow->draw(bg);
 		
@@ -79,46 +78,45 @@ void Game::play(){
 			soundQ.play();
 			encert = musica.encertaNota(1);
 			pressQ = false;
-			            std::cout<<"q"<<std::endl;
+			if (not encert) monjo.downLvlConc(false);
+			else monjo.upLvlConc();
 
 		}
 		else if (not sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) pressQ = true;
 		
-		//if (not encert) jugador.downLvlConc(false);
-		//else monjo.upLvlConc();
-		
+				
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) and pressW){
 			soundW.play();
 			encert = musica.encertaNota(2);
 			pressW = false;
+			if (not encert) monjo.downLvlConc(false);
+		else monjo.upLvlConc();
+
 		}
 		else if (not sf::Keyboard::isKeyPressed(sf::Keyboard::W)) pressW = true;
 				
-		//if (not encert) jugador.downLvlConc(false);
-		//else monjo.upLvlConc();
-		
 		   
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::E) and pressE){
 			soundE.play();
 			encert = musica.encertaNota(3);
 			pressE = false;
+			if (not encert) monjo.downLvlConc(false);
+			else monjo.upLvlConc();
+
 		}
 		else if (not sf::Keyboard::isKeyPressed(sf::Keyboard::E)) pressE = true;
-		
-		//if (not encert) jugador.downLvlConc(false);
-		//else monjo.upLvlConc();
-				   
+						   
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::R) and pressR){
 			soundR.play();
 			encert = musica.encertaNota(4);
 			pressR = false;
+			if (not encert) monjo.downLvlConc(false);
+			else monjo.upLvlConc();
+
 		}
 		else if (not sf::Keyboard::isKeyPressed(sf::Keyboard::R)) pressR = true;
 		
 
-		//if (not encert) jugador.downLvlConc(false);
-		//else monjo.upLvlConc();
-		
 		bool notaPerduda = false;
 		notaPerduda = musica.update();
 		if (notaPerduda) monjo.downLvlConc(true);
