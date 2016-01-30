@@ -314,16 +314,13 @@ void Game::play(){
 
 	
 	if (not exitLoop) { //Player dead
+	
 
-sf::Time elapsed_t = GameTime.getElapsedTime();
+		
+		sf::Time elapsed_t = GameTime.getElapsedTime();
 		sf::Font font;
 	    if (!font.loadFromFile("./resources/OpenSans-Regular.ttf")) std::cout << "Failed to load font" << std::endl;
-		sf::RectangleShape scoreBoard;
-	 	scoreBoard.setFillColor(sf::Color(0,0,0,128));
-    	scoreBoard.setSize(sf::Vector2f(800,600));
-    	scoreBoard.setPosition(W_WIDTH/2 - 400,W_HEIGHT/2 - 300);
 
-        _myWindow->draw(scoreBoard);
 
 		string text = "Score points - " + to_string(mana) 
 		+ "\n\nRacha maxima - " + to_string(max_combo) 
@@ -333,9 +330,28 @@ sf::Time elapsed_t = GameTime.getElapsedTime();
 		+ "segundos\n\n                                               PRESS RETURN TO EXIT";
 		sf::Text scoreText(text, font, 20);
 		scoreText.setColor(sf::Color(255,255,255));
-		scoreText.setPosition(sf::Vector2f(scoreBoard.getPosition().x + 70, scoreBoard.getPosition().y +20));
+		scoreText.setPosition(sf::Vector2f(W_WIDTH/2 - 400 + 70,W_HEIGHT/2 - 300 +20));
 		_myWindow->draw(scoreText);
-
+		
+		
+		sf::RectangleShape fadeRct(sf::Vector2f(W_WIDTH,W_HEIGHT));
+		int i = 0;
+		while (i < 255){
+			
+			_myWindow->clear();
+			_myWindow->draw(bg);
+			_myWindow->draw(player);
+			
+			
+			fadeRct.setFillColor(sf::Color(0,0,0,i));
+			_myWindow->draw(fadeRct);
+			_myWindow->draw(scoreText);
+			_myWindow->display();
+			i+=5;
+		}		
+		
+		
+		
 		_myWindow->display();
 			while(not sf::Keyboard::isKeyPressed(sf::Keyboard::Return)) ;
            

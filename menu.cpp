@@ -95,6 +95,24 @@ void Menu::run(){
                     play.setPosition(W_WIDTH/2-W_WIDTH/3/2,W_HEIGHT*1/5-W_HEIGHT/7/2);
                     credits.setPosition(W_WIDTH/2-W_WIDTH/3/2,W_HEIGHT*2/5-W_HEIGHT/7/2);
                     exit.setPosition(W_WIDTH/2-W_WIDTH/3/2,W_HEIGHT*3/5-W_HEIGHT/7/2);
+					
+					sf::RectangleShape fadeRct(sf::Vector2f(W_WIDTH,W_HEIGHT));
+					
+					int i = 255;
+					while (i > 0){
+						
+						window.clear();
+						window.draw(bg);
+						window.draw(play);
+						window.draw(credits);
+						window.draw(exit);
+						
+						fadeRct.setFillColor(sf::Color(0,0,0,i));
+						window.draw(fadeRct);
+						window.display();
+						i-=3;
+					}
+					
                     //Hide buttons
                     //joc.play()
                     //Show buttons
@@ -118,7 +136,7 @@ void Menu::run(){
                         window.clear();
                         window.draw(bg);
                         
-                        creditText.setPosition((float)W_WIDTH/2-W_WIDTH/3/2,(float)i/2);
+                        creditText.setPosition((float)W_WIDTH/6,(float)i/2);
                         window.draw(creditText);
                         
                         sf::Event event2;
