@@ -1,5 +1,7 @@
 #include "utils.hpp"
-
+#include <stdio.h>
+#include <stdlib.h>
+#include <string>
 Game::Game(sf::RenderWindow* window): _myWindow(window){
 	
 	
@@ -35,7 +37,8 @@ void Game::play(){
 	bool pressQ = true, pressW = true, pressE = true, pressR = true;
         bool exitLoop = false;
 	
-		sf::SoundBuffer buffer;
+
+    	sf::SoundBuffer buffer;
 		sf::Sound soundQ;
 		buffer.loadFromFile("./resources/music/46.wav");
 		soundQ.setBuffer(buffer);
@@ -49,9 +52,7 @@ void Game::play(){
 		buffer.loadFromFile("./resources/music/46.wav");
 		soundR.setBuffer(buffer);
 
-		sf::Sound backgroundS;
-		buffer.loadFromFile("./resources/music/BSong.mp3");
-		backgroundS.setBuffer(buffer);
+		
 
 	while(monjo.getLvlConc() > 0 and not exitLoop){ //Player alive
 		
