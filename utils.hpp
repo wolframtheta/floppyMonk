@@ -33,7 +33,7 @@
 
 
 
-static const char* file_monjo = "";
+static const char* file_monjo = "./resources/finish_monk_green.png";
 static const char* file_bg = "./resources/Img_T_Game.jpg";
 
 #endif // UTILS_HPP
