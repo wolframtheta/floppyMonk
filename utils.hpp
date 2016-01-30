@@ -18,12 +18,21 @@
 #include <SFML/Audio.hpp>
 
 #include "menu.hpp"
+#include "monjo.hpp"
+#include "nota.hpp"
+#include "listNota.hpp"
+#include "game.hpp"
+
 
 #define W_WIDTH 400
 #define W_HEIGHT 600
-#define APP_NAME "Floppy Monk"
 
-static const sf:Texture spriteSheet;
+
+#define APP_NAME "Floppy Monk"
+using namespace std;
+
+
+static const char* name_monjo = "";
 
 
 #endif // UTILS_HPP
