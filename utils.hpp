@@ -38,5 +38,11 @@ static const char* file_monjo = "./resources/finish_monk_green.png";
 static const char* file_bg = "./resources/Img_T_Game.jpg";
 static const char* file_tile="./resources/sprite.png";
 
+static const std::vector<float> vel = {1.0, 0.9,0.8,0.7,0.6,0.5,0.4,0.3,0.2,0.1};
+
+static int maxim(int a, int b)
+{
+    return (a>b)?a : b;
+}
 
 #endif // UTILS_HPP

@@ -13,15 +13,18 @@ public:
     void downLvlConc(bool b);
     int getLvlConc();
     void update();
+    void healthDown();
+    int getHp();
     sf::Vector2f getPos();
-    
+    void regHp();
+
 private:
     
     sf::Vector2f pos;
     //sf::Sprite spr;
     int lvlConc;
-
-
+    int health;
+    char overflow;
     /*sf::Texture spriteSheet;
     
     sf::RectangleShape bg;

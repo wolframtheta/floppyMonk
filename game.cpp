@@ -15,6 +15,22 @@ void Game::play(){
 	if (!bgT.loadFromFile(file_bg)) std::cout << "Error loading spriteSheet" << std::endl;
         bg.setTexture(bgT);
         
+
+        sf::RectangleShape hp1;
+        hp1.setFillColor(sf::Color(171,0,0));
+    	hp1.setSize(sf::Vector2f(W_WIDTH/3,40));
+    	hp1.setPosition(200,30);
+        sf::RectangleShape hp2;
+        hp2.setFillColor(sf::Color(255,0,0));
+    	hp2.setSize(sf::Vector2f(W_WIDTH/3,40));
+    	hp2.setPosition(200,30);
+    	_myWindow->draw(hp1);
+    	_myWindow->draw(hp2);
+
+
+    	//texto score
+
+
 	Monjo monjo;
         sf::Sprite player;
         sf::Texture monjoT;
@@ -53,8 +69,8 @@ void Game::play(){
 
 		
 
-	while(monjo.getLvlConc() > 0 and not exitLoop){ //Player alive
-		
+	while(monjo.getHp() > 0 and not exitLoop){ //Player alive
+			
                 sf::Event event;
                 while (_myWindow->pollEvent(event)){
                     if (event.type == sf::Event::Closed) exitLoop = true;
@@ -143,16 +159,20 @@ void Game::play(){
             _myWindow->draw(spriteNota);
             it++;
         }
-		
+		monjo.regHp();
 		sf::Sprite hBRectangle;
 		hBRectangle.setTexture(notaT);
 		hBRectangle.setTextureRect(sf::IntRect(0,0,420,120));
 		hBRectangle.setPosition(posRectangle);
 		_myWindow->draw(hBRectangle);
-		
-			
+		hp2.setSize(sf::Vector2f(maxim(0,((float)monjo.getHp()/100.0f)*W_WIDTH/3),40));
+
+		_myWindow->draw(hp1);
+		_myWindow->draw(hp2);
 		_myWindow->display();
 		
+		musica.setTempo(vel[(monjo.getLvlConc()-1)/25]);
+		std::cout<<musica.getTempo()<<std::endl;
 	}
 
 

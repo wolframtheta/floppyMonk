@@ -2,7 +2,7 @@
 
 listNota::listNota(){
 	
-	tempo = 0.5;
+	tempo = 1.0f;
 	zona.left = posRectangle.x;
 	zona.top = posRectangle.y;
 	zona.width = 380;
@@ -58,4 +58,9 @@ bool listNota::encertaNota(int type){
 
 	return trobada;
 	
+}
+
+void listNota::setTempo(float tmp)
+{
+	tempo=tmp;
 }

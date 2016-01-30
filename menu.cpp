@@ -3,7 +3,7 @@
 void Menu::run(){
     
     sf::RenderWindow window(sf::VideoMode(W_WIDTH, W_HEIGHT), APP_NAME/*, sf::Style::Fullscreen*/);
-    window.setFramerateLimit(60);
+    //window.setFramerateLimit(60);
     sf::Texture bgT;
     if (!bgT.loadFromFile(file_bg)) std::cout << "Error loading spriteSheet" << std::endl;
     

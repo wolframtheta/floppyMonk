@@ -8,34 +8,36 @@ Monjo::Monjo() {
     spr.setOrigin(160,160);
     spr.setPosition(//W_WIDTH/2,W_HEIGHT*2/3);
     */
-    lvlConc = 100;
+    lvlConc = 1;//MAX 250
     pos.x = 840; //centrado, se puede hacer +-20 para movimiento sinusoidal.
     pos.y = 500; //y-suelo = 500, y-techo = 0
+    health = 100;
+    overflow = -126;
 
 }
 
 void Monjo::upLvlConc() {
+    if(lvlConc<251)
+         lvlConc += 1;
+    pos.y=500- lvlConc*2;
 
-    lvlConc += 7;
-    pos.y--;
-    if(pos.y<0) pos.y=0;
 }
 
 //b és true si es falla la nota
 //b és false si es pitja la tecla incorrecta
 void Monjo::downLvlConc(bool b) {
+    healthDown();
     if (b)
     {
-        lvlConc -= 5;
-        pos.y+=3;
-        if(pos.y>500) pos.y=500;
+        lvlConc -= 2;
     } 
     else 
     {
-        lvlConc -= 3;
-        pos.y+=2;
-        if(pos.y>500) pos.y=500;
+        lvlConc -= 1;
     }
+    if(lvlConc<0) lvlConc=0;
+    pos.y=500- lvlConc*2;
+
 }
 
 int Monjo::getLvlConc() {
@@ -55,4 +57,21 @@ sf::Vector2f Monjo::getPos(){
     
     return pos;
     
+}
+
+
+void Monjo::healthDown()
+{
+
+
+    health = health - maxim(5,lvlConc*0.2);
+
+}
+int Monjo::getHp() { 
+    return health; 
+}
+
+void Monjo::regHp() {
+    overflow+=3;
+    if (overflow<=-124)++health;
 }

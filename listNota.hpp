@@ -11,7 +11,7 @@ public:
 	bool update();
 	bool encertaNota(int);
 	std::list<Nota> listNotes;
-
+    void setTempo(float tmp);
 private:
 	
 	//el tempo conta segons entre notes
