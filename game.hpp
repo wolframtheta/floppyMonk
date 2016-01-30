@@ -3,10 +3,16 @@
 
 class Game {
 public:
+	
+	Game(sf::RenderWindow* window);
+	void play();
 
 private:
-	Monjo monjo;
-	
+
+	Monjo jugador;
+	listNota musica;
+	sf::Sprite bg;
+	sf::RenderWindow* _myWindow;
 
 };
 
