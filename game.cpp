@@ -28,30 +28,31 @@ void Game::play(){
         
 
         sf::RectangleShape hp1;
-        hp1.setFillColor(sf::Color(171,0,0));
-    	hp1.setSize(sf::Vector2f(W_WIDTH/3,20));
-    	hp1.setPosition(200,130);
+            hp1.setFillColor(sf::Color(171,0,0));
+            hp1.setSize(sf::Vector2f(W_WIDTH/3,20));
+            hp1.setPosition(200,130);
         sf::RectangleShape hp2;
-        hp2.setFillColor(sf::Color(255,0,0));
-    	hp2.setSize(sf::Vector2f(W_WIDTH/3,20));
-    	hp2.setPosition(200,130);
+            hp2.setFillColor(sf::Color(255,0,0));
+            hp2.setSize(sf::Vector2f(W_WIDTH/3,20));
+            hp2.setPosition(200,130);
 
 
-
-	Monjo monjo;
-        sf::Sprite player;
         sf::Texture monjoT;
-        if (!monjoT.loadFromFile(file_monjo)) std::cout << "Failed to load monjo" << std::endl;
-        player.setTexture(monjoT);
+            if (!monjoT.loadFromFile(file_monjo)) std::cout << "Failed to load monjo" << std::endl;
+        sf::Sprite player;
+            player.setTexture(monjoT);
 	
-        
+            
+            
+        Monjo monjo;
         listNota musica;
         listNota musica2;
         //frequencia entre notes
-        sf::Sprite spriteNota;
+
         sf::Texture notaT;
-        if (!notaT.loadFromFile(file_tile)) std::cout << "Failed to load nota" << std::endl;
-        spriteNota.setTexture(notaT);
+            if (!notaT.loadFromFile(file_tile)) std::cout << "Failed to load nota" << std::endl;
+        sf::Sprite spriteNota;
+            spriteNota.setTexture(notaT);
         
 	//creem el rellotge del joc
 	sf::Clock clock;
