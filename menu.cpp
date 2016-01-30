@@ -61,8 +61,29 @@ void Menu::run(){
                 }
                 else if (cursorAim.intersects(Rcred)){
                     std::cout << "Credits ok!" << std::endl;
-                    //Hide buttons
-                    //Roll the credits
+                    
+                    play.setPosition(-500,-500);
+                    credits.setPosition(-500,-500);
+                    exit.setPosition(-500,-500);
+                    
+                    //Roll credits
+                    sf::Font font;
+                    if (!font.loadFromFile("./resources/RemachineScript_Personal_Use.ttf")) std::cout << "Failed to load font" << std::endl;
+                    sf::Text creditText("GameJam Barcelona 2016",font,30);
+                    creditText.setColor(sf::Color(255,255,255));
+                    for (int i = W_HEIGHT;i>0;i--){
+                        window.clear();
+                        window.draw(bg);
+                        
+                        creditText.setPosition((float)W_WIDTH/5,(float)i);
+                        window.draw(creditText);
+                        window.display();
+                        
+                    }
+                    
+                    play.setPosition(20,20);
+                    credits.setPosition(20,90);
+                    exit.setPosition(20,160);
                     //Display buttons
                 }
                 else if (cursorAim.intersects(Rexit)){
