@@ -32,6 +32,7 @@
 
 
 
+static const sf::Vector2f posRectangle = sf::Vector2f(1250, 760);
 
 static const char* file_monjo = "./resources/finish_monk_green.png";
 static const char* file_bg = "./resources/Img_T_Game.jpg";

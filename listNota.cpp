@@ -2,9 +2,9 @@
 
 listNota::listNota(){
 	
-	tempo = 1;
-	zona.left = 1520;
-	zona.top = W_HEIGHT*3/4+20;
+	tempo = 0.5;
+	zona.left = posRectangle.x;
+	zona.top = posRectangle.y;
 	zona.width = 380;
 	zona.height = 80;
 	
@@ -45,9 +45,13 @@ bool listNota::encertaNota(int type){
 	
 	std::list<Nota>::iterator it = listNotes.begin();
 	while (it != listNotes.end() and not trobada){
-		if ((*it).getType() == type and (*it).encert(zona)){
+		
+		if ((*it).getType() == type) {
+			if ((*it).encert(zona)){
+
 				listNotes.erase(it--);
 				trobada = true;
+			}
 		}
 		++it;
 	}

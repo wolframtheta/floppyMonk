@@ -11,7 +11,6 @@ Game::Game(sf::RenderWindow* window): _myWindow(window){
 }
 
 void Game::play(){
-	
         sf::Texture bgT;
 	if (!bgT.loadFromFile(file_bg)) std::cout << "Error loading spriteSheet" << std::endl;
         bg.setTexture(bgT);
@@ -38,19 +37,19 @@ void Game::play(){
         bool exitLoop = false;
 	
 
-    	sf::SoundBuffer buffer;
+    	sf::SoundBuffer buffer1, buffer2, buffer3, buffer4;
 		sf::Sound soundQ;
-		buffer.loadFromFile("./resources/music/46.wav");
-		soundQ.setBuffer(buffer);
+		buffer1.loadFromFile("./resources/music/1.wav");
+		soundQ.setBuffer(buffer1);
 		sf::Sound soundW;
-		buffer.loadFromFile("./resources/music/46.wav");
-		soundW.setBuffer(buffer);
+		buffer2.loadFromFile("./resources/music/15.wav");
+		soundW.setBuffer(buffer2);
 		sf::Sound soundE;
-		buffer.loadFromFile("./resources/music/46.wav");
-		soundE.setBuffer(buffer);
+		buffer3.loadFromFile("./resources/music/34.wav");
+		soundE.setBuffer(buffer3);
 		sf::Sound soundR;
-		buffer.loadFromFile("./resources/music/46.wav");
-		soundR.setBuffer(buffer);
+		buffer4.loadFromFile("./resources/music/48.wav");
+		soundR.setBuffer(buffer4);
 
 		
 
@@ -128,24 +127,35 @@ void Game::play(){
 		notaPerduda = musica.update();
 		if (notaPerduda) monjo.downLvlConc(true);
 		std::list<Nota>::iterator it = musica.listNotes.begin();
+
+		
+
 		while (it != musica.listNotes.end()){
-                    
-					
-	spriteNota.setTextureRect(sf::IntRect(((*it).getType()-1)*80,120,80,80));
-	
-	spriteNota.setPosition(sf::Vector2f((*it).getPos().x + ((*it).getType()-1)*100, (*it).getPos().y));
-	
-					
-                    _myWindow->draw(spriteNota);
-                    it++;
-                }
+                 
+
+
+
+			spriteNota.setTextureRect(sf::IntRect(((*it).getType()-1)*80,120,80,80));
+
+			spriteNota.setPosition(sf::Vector2f((*it).getPos().x + ((*it).getType()-1)*100, (*it).getPos().y));
+
+			
+            _myWindow->draw(spriteNota);
+            it++;
+        }
 		
-		
+		sf::Sprite hBRectangle;
+		hBRectangle.setTexture(notaT);
+		hBRectangle.setTextureRect(sf::IntRect(0,0,420,120));
+		hBRectangle.setPosition(posRectangle);
+		_myWindow->draw(hBRectangle);
 		
 			
 		_myWindow->display();
 		
 	}
+
+
 	
 	if (not exitLoop) { //Player dead
             

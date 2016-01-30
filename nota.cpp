@@ -13,7 +13,7 @@ Nota::Nota(int nota){
 /*	float posx = 1920-400+20*type+40*(type-1);
 	float posy = -40;*/
 	
-	pos.x = 500;
+	pos.x = posRectangle.x + 20;
 	pos.y = -40;
 	
 }
@@ -34,7 +34,6 @@ bool Nota::fora(){
 }
 
 bool Nota::encert(sf::IntRect zona){
-	
 	sf::IntRect hbNote(pos.x,pos.y,80,80);
 	return (hbNote.intersects(zona));
 	
