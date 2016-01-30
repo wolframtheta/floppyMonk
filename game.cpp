@@ -106,188 +106,289 @@ void Game::play(){
             
             _myWindow->clear();
             _myWindow->draw(bg);
-		
-		
-            if  (clock.getElapsedTime().asSeconds() >= musica.getTempo()) {
-                time = clock.restart();
-                musica.newNota();	
-            }
-				
-            player.setPosition(monjo.getPos());
 
-            int spx;
-            if (monjo.getLvlConc() < 62.5) spx = 0;
-            else if (monjo.getLvlConc() < 125) spx = 320;
-            else if (monjo.getLvlConc() < 187.5) spx = 640;
-            else spx = 960;
-
-
-
-
-            int oldFalladas = falladas;
-            bool encert = false;
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q) and pressQ ){
-                soundQ.play();
-                encert = musica.encertaNota(1);
-                pressQ = false;
-                if (not encert){
-                        monjo.downLvlConc(false);
-                        racha=0;
-                        falladas++;
-                        multiplicador=1;
-                }
-                else {
-                    monjo.upLvlConc();
-                    racha++;
-                    acertadas++;
-                    mana= mana + 2*multiplicador; //2 puntos sin multiplicador.
-                }
-            }
-            else if (not sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) pressQ = true;
             
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) and pressW){
-                soundW.play();
-                encert = musica.encertaNota(2);
-                pressW = false;
-                if (not encert){
-                    monjo.downLvlConc(false);
-                    racha=0;
-                    falladas++;
-                    multiplicador=1;
+            if (notes_disponibles>0){ //Key presses
+                int oldFalladas = falladas;
+                bool encert = false;
+                
+                if  (clock.getElapsedTime().asSeconds() >= musica.getTempo()) {
+                    time = clock.restart();
+                    musica.newNota();
                 }
-                else {
-                    monjo.upLvlConc();
-                    racha++;
-                    acertadas++;
-                    mana= mana + 2*multiplicador; //2 puntos sin multiplicador.
+                if  (clock.getElapsedTime().asSeconds() >= musica2.getTempo()) {
+                    time = clock.restart();
+                    musica2.newNota();
                 }
-            }
-            else if (not sf::Keyboard::isKeyPressed(sf::Keyboard::W)) pressW = true;
-
-                    
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::E) and pressE){
-                soundE.play();
-                encert = musica.encertaNota(3);
-                pressE = false;
-                if (not encert){
-                    monjo.downLvlConc(false);
-                    racha=0;
-                    falladas++;
-                    multiplicador=1;
-                }
-                else {
-                    monjo.upLvlConc();
-                    racha++;
-                    acertadas++;
-                    mana= mana + 2*multiplicador; //2 puntos sin multiplicador
-                }
-            }
-            else if (not sf::Keyboard::isKeyPressed(sf::Keyboard::E)) pressE = true;
-                                                    
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::R) and pressR){
-                soundR.play();
-                encert = musica.encertaNota(4);
-                pressR = false;
-                if (not encert){
+                
+                //Per a cada nota disponible, comprovar si s'encerta o es falla i canviar concentració
+                if (canQ){
+                    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q) and pressQ ){                   //Q
+                        soundQ.play();
+                        encert = musica.encertaNota(1);
+                        pressQ = false;
+                        if (not encert) {
                             monjo.downLvlConc(false);
                             racha=0;
                             falladas++;
                             multiplicador=1;
+                                //wrongTile();
+                        }
+                        else {
+                            monjo.upLvlConc();
+                            racha++;
+                            acertadas++;
+                            mana= mana + 2*multiplicador; //2 puntos sin multiplicador.
+                        }
+                    }
+                    else if (not sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) pressQ = true;
+                }
+
+                if (canW){
+                    if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) and pressW){
+                            soundW.play();
+                            encert = musica.encertaNota(2);
+                            pressW = false;
+                            if (not encert){
+                                    monjo.downLvlConc(false);
+                                    racha=0;
+                                    falladas++;
+                                    multiplicador=1;
+
+                            }
+                            else {
+                                    monjo.upLvlConc();
+                                    racha++;
+                                    acertadas++;
+                                    mana= mana + 2*multiplicador; //2 puntos sin multiplicador.
+
+                            }
 
                     }
-            else 
-            {
-                    monjo.upLvlConc();
-                    racha++;
-                    acertadas++;
-                    mana= mana + 2*multiplicador; //2 puntos sin multiplicador.
+                    else if (not sf::Keyboard::isKeyPressed(sf::Keyboard::W)) pressW = true;
+                }          
+                
+                if (canE){
+                    if (sf::Keyboard::isKeyPressed(sf::Keyboard::E) and pressE){
+                            soundE.play();
+                            encert = musica.encertaNota(3);
+                            pressE = false;
+                            if (not encert){
+                                    monjo.downLvlConc(false);
+                                    racha=0;
+                                    falladas++;
+                                    multiplicador=1;
+
+                            }
+                            else {
+                                    monjo.upLvlConc();
+                                    racha++;
+                                    acertadas++;
+                                    mana= mana + 2*multiplicador; //2 puntos sin multiplicador.
+
+                            }
+
+                    }
+                    else if (not sf::Keyboard::isKeyPressed(sf::Keyboard::E)) pressE = true;
                 }
-            }
-            else if (not sf::Keyboard::isKeyPressed(sf::Keyboard::R)) pressR = true;
-            
+                
+                if (canR){
+                    if (sf::Keyboard::isKeyPressed(sf::Keyboard::R) and pressR){
+                            soundR.play();
+                            encert = musica.encertaNota(4);
+                            pressR = false;
+                            if (not encert) {
+                                    monjo.downLvlConc(false);
+                                    racha=0;
+                                    falladas++;
+                                    multiplicador=1;
 
-            bool notaPerduda = false;
-            notaPerduda = musica.update();
-            if (notaPerduda) {
-                    monjo.downLvlConc(true);
-                    racha = 0;
-                    falladas++;
-                    multiplicador = 1;
-            }
-            std::list<Nota>::iterator it = musica.listNotes.begin();
+                            }
+                            else {
+                                    monjo.upLvlConc();
+                                    racha++;
+                                    acertadas++;
+                                    mana= mana + 2*multiplicador; //2 puntos sin multiplicador.
 
-            if (falladas > oldFalladas) spx = 1280;
+                            }
+
+                    }
+                    else if (not sf::Keyboard::isKeyPressed(sf::Keyboard::R)) pressR = true;
+                }
+                
+                if (canU){
+                    if (sf::Keyboard::isKeyPressed(sf::Keyboard::U) and pressU){
+                        soundQ.play();
+                        encert = musica2.encertaNota(1);
+                        pressQ = false;
+                        if (not encert){
+                                monjo.downLvlConc(false);
+                                racha=0;
+                                falladas++;
+                                multiplicador=1;
+                        }
+                        else {
+                            monjo.upLvlConc();
+                            racha++;
+                            acertadas++;
+                            mana= mana + 2*multiplicador; //2 puntos sin multiplicador.
+                        }
+                    }
+                    else if (not sf::Keyboard::isKeyPressed(sf::Keyboard::U)) pressU = true;
+                }
+                
+                if (canI){
+                    if (sf::Keyboard::isKeyPressed(sf::Keyboard::I) and pressI){
+                        soundW.play();
+                        encert = musica2.encertaNota(2);
+                        pressW = false;
+                        if (not encert){
+                            monjo.downLvlConc(false);
+                            racha=0;
+                            falladas++;
+                            multiplicador=1;
+                        }
+                        else {
+                            monjo.upLvlConc();
+                            racha++;
+                            acertadas++;
+                            mana= mana + 2*multiplicador; //2 puntos sin multiplicador.
+                        }
+                    }
+                    else if (not sf::Keyboard::isKeyPressed(sf::Keyboard::I)) pressI = true;
+                }
+                            
+                if (canO){
+                    if (sf::Keyboard::isKeyPressed(sf::Keyboard::O) and pressO){
+                        soundE.play();
+                        encert = musica2.encertaNota(3);
+                        pressE = false;
+                        if (not encert){
+                            monjo.downLvlConc(false);
+                            racha=0;
+                            falladas++;
+                            multiplicador=1;
+                        }
+                        else {
+                            monjo.upLvlConc();
+                            racha++;
+                            acertadas++;
+                            mana= mana + 2*multiplicador; //2 puntos sin multiplicador
+                        }
+                    }
+                    else if (not sf::Keyboard::isKeyPressed(sf::Keyboard::O)) pressO = true;
+                }
+                
+                if (canP){
+                    if (sf::Keyboard::isKeyPressed(sf::Keyboard::P) and pressP){
+                        soundR.play();
+                        encert = musica2.encertaNota(4);
+                        pressR = false;
+                        if (not encert){
+                                    monjo.downLvlConc(false);
+                                    racha=0;
+                                    falladas++;
+                                    multiplicador=1;
+
+                            }
+                    else 
+                    {
+                            monjo.upLvlConc();
+                            racha++;
+                            acertadas++;
+                            mana= mana + 2*multiplicador; //2 puntos sin multiplicador.
+                        }
+                    }
+                    else if (not sf::Keyboard::isKeyPressed(sf::Keyboard::P)) pressP = true;
+                }
+
+                bool notaPerduda = false;
+                notaPerduda = musica.update() and musica2.update();
+                if (notaPerduda) {
+                        monjo.downLvlConc(true);
+                        racha = 0;
+                        falladas++;
+                        multiplicador = 1;
+                }
+                std::list<Nota>::iterator it = musica.listNotes.begin();
+
+                if (falladas > oldFalladas) spx = 1280;
+                
+            }
 
             player.setTextureRect(sf::IntRect(spx,0,320,320));
             _myWindow->draw(player);
+=======
+		while (it != musica.listNotes.end()){
+			spriteNota.setTextureRect(sf::IntRect(((*it).getType()-1)*80,120,80,80));
+			spriteNota.setPosition(sf::Vector2f((*it).getPos().x + ((*it).getType()-1)*100, (*it).getPos().y));
+            _myWindow->draw(spriteNota);
+            it++;
+        }
+		sf::Font font;
+	    if (!font.loadFromFile("./resources/OpenSans-Regular.ttf")) std::cout << "Failed to load font" << std::endl;
+	    sf::Text scoreText("Score: " + to_string(mana),font,50);
+	    scoreText.setColor(sf::Color(255,255,255));
+	    scoreText.setPosition(250, 60);
+        _myWindow->draw(scoreText);
+
+        sf::Text multiplierText("x", font, 50);
+       	multiplierText.setColor(sf::Color(105,105,105));
+       	multiplierText.setPosition(1820, 1020);
+       	_myWindow->draw(multiplierText);
+
+       sf::Sprite hBRectangle;
+		hBRectangle.setTexture(notaT);
+		hBRectangle.setTextureRect(sf::IntRect(0,0,420,120));
+		hBRectangle.setPosition(posRectangle);
+
+       	sf::Text numberMultiplier(to_string(multiplicador), font, 70);
+       	numberMultiplier.setPosition(1850, 1000);
+       	switch (multiplicador) {
+       		case 2:
+       			numberMultiplier.setColor(sf::Color(0,0,204));
+       			hBRectangle.setColor(sf::Color(0,0,204));
+       			break;
+       		case 3:
+				numberMultiplier.setColor(sf::Color(128,255,0));
+       			hBRectangle.setColor(sf::Color(128,255,0));
+				break;
+       		case 4:
+   				numberMultiplier.setColor(sf::Color(0,51,0));
+       			hBRectangle.setColor(sf::Color(0,51,0));
+   				break;
+       		case 5:
+       			numberMultiplier.setColor(sf::Color(204,0,204));
+       			hBRectangle.setColor(sf::Color(204,0,204));
+       			break;
+       		case 6:	
+       			numberMultiplier.setColor(sf::Color(255,0,0));
+       			hBRectangle.setColor(sf::Color(255,0,0));
+       			break;
+       	}
+       	_myWindow->draw(numberMultiplier);
+
+
+       	sf::Text rachaText(to_string(racha), font, 50);
+       	rachaText.setColor(sf::Color(255,255,255));
+       	rachaText.setPosition(750, 60);
+       	_myWindow->draw(rachaText);
+
+		monjo.regHp();
+		sf::Time elapsed_t = GameTime.getElapsedTime();
+		monjo.update(elapsed_t.asSeconds());
 
 
 
-            while (it != musica.listNotes.end()){
-                spriteNota.setTextureRect(sf::IntRect(((*it).getType()-1)*80,120,80,80));
-                spriteNota.setPosition(sf::Vector2f((*it).getPos().x + ((*it).getType()-1)*100, (*it).getPos().y));
-                _myWindow->draw(spriteNota);
-                it++;
-            }
-            
-            sf::Font font;
-            if (!font.loadFromFile("./resources/OpenSans-Regular.ttf")) std::cout << "Failed to load font" << std::endl;
-            sf::Text scoreText("Score: " + to_string(mana),font,50);
-            scoreText.setColor(sf::Color(255,255,255));
-            scoreText.setPosition(250, 60);
-            _myWindow->draw(scoreText);
+		
+		_myWindow->draw(hBRectangle);
+		hp2.setSize(sf::Vector2f(maxim(0,((float)monjo.getHp()/100.0f)*W_WIDTH/3),20));
 
-            sf::Text multiplierText("x", font, 50);
-            multiplierText.setColor(sf::Color(105,105,105));
-            multiplierText.setPosition(1820, 1020);
-            _myWindow->draw(multiplierText);
-
-            sf::Text numberMultiplier(to_string(multiplicador), font, 70);
-            numberMultiplier.setPosition(1850, 1000);
-            switch (multiplicador) {
-                case 2:
-                    numberMultiplier.setColor(sf::Color(0,0,204));
-                    break;
-                case 3:
-                    numberMultiplier.setColor(sf::Color(128,255,0));
-                    break;
-                case 4:
-                    numberMultiplier.setColor(sf::Color(0,51,0));
-                    break;
-                case 5:
-                    numberMultiplier.setColor(sf::Color(204,0,204));
-                    break;
-                case 6:	
-                    numberMultiplier.setColor(sf::Color(255,0,0));
-                    break;
-            }
-            _myWindow->draw(numberMultiplier);
-
-
-            sf::Text rachaText(to_string(racha), font, 50);
-            rachaText.setColor(sf::Color(255,255,255));
-            rachaText.setPosition(750, 60);
-            _myWindow->draw(rachaText);
-
-            monjo.regHp();
-            sf::Time elapsed_t = GameTime.getElapsedTime();
-            monjo.update(elapsed_t.asSeconds());
-
-
-
-            sf::Sprite hBRectangle;
-            hBRectangle.setTexture(notaT);
-            hBRectangle.setTextureRect(sf::IntRect(0,0,420,120));
-            hBRectangle.setPosition(posRectangle);
-            _myWindow->draw(hBRectangle);
-            hp2.setSize(sf::Vector2f(maxim(0,((float)monjo.getHp()/100.0f)*W_WIDTH/3),20));
-
-            _myWindow->draw(hp1);
-            _myWindow->draw(hp2);
-            _myWindow->display();
-                    
-            musica.setTempo(vel[((monjo.getLvlConc()-1)/25)%10]);
-
+		_myWindow->draw(hp1);
+		_myWindow->draw(hp2);
+		_myWindow->display();
+		
+		musica.setTempo(vel[((monjo.getLvlConc()-1)/25)%10]);
 
             ////puntuacuiones
             if(racha>max_combo) max_combo=racha;
