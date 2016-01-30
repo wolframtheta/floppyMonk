@@ -1,9 +1,14 @@
 #include "utils.hpp"
 
+listNota::listNota(float tempo) {
+	this.tempo = tempo;
+}
+
 void listNota::newNota() {
 	Nota nota(rand() % 4 +1);
 	listNotes.push_back(nota);
 }
+
 
 float listNota::getTempo(){
 	return tempo;

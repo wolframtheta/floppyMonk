@@ -11,7 +11,7 @@ public:
 	
     void upLvlConc();
     void downLvlConc(bool b);
-    
+    int getLvlConc();
     
     
 private:
