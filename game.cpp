@@ -25,13 +25,16 @@ void Game::play(){
 	
 	while(jugador.getLvlConc() > 0){
 		
+		_myWindow->clear();
+		_myWindow->draw(bg);
+		
+		
 		if  (clock.getElapsedTime().asSeconds() >= tempo) {
 			time = clock.restart();
 			musica.newNota();
 		}
 		
 		jugador.update(_myWindow);
-		
 		
 		bool encert = false;
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q) and pressQ){
@@ -74,6 +77,14 @@ void Game::play(){
 		bool notaPerduda = false;
 		notaPerduda = musica.update();
 		if (notaPerduda) jugador.downLvlConc(true);
+		
+		
+		
+		_myWindow->display();
+		
 	}
+	
+	
+	
 	
 }
