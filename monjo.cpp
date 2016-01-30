@@ -9,8 +9,8 @@ Monjo::Monjo() {
     spr.setPosition(//W_WIDTH/2,W_HEIGHT*2/3);
     */
     lvlConc = 1;
-    pos.x = W_WIDTH/3;
-    pos.y = 300; //NEEDS TO CHANGE
+    pos.x = 840; //centrado, se puede hacer +-20 para movimiento sinusoidal.
+    pos.y = 500; //y-suelo = 500, y-techo = 0
 
 }
 

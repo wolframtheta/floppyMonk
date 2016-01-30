@@ -75,13 +75,12 @@ void Game::play(){
                 _myWindow->draw(player);
 		
 		bool encert = false;
-
-
-
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q) and pressQ){
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q) and pressQ ){
 			soundQ.play();
 			encert = musica.encertaNota(1);
 			pressQ = false;
+			            std::cout<<"q"<<std::endl;
+
 		}
 		else if (not sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) pressQ = true;
 		
@@ -121,9 +120,7 @@ void Game::play(){
 		//else monjo.upLvlConc();
 		
 		bool notaPerduda = false;
-		std::cout<<"ffff"<<std::endl;
 		notaPerduda = musica.update();
-		std::cout<<"ssss"<<std::endl;
 		if (notaPerduda) monjo.downLvlConc(true);
 		std::list<Nota>::iterator it = musica.listNotes.begin();
 		while (it != musica.listNotes.end()){
