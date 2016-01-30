@@ -4,13 +4,17 @@
 class listNota {
 
 public:
+	
+	listNota();
 	void newNota();
-	listNota(int freq);
-	int getTempo();
+	float getTempo();
+
 
 private:
 	std::list<Nota> listNotas;
-	int tempo;
+	
+	//el tempo conta segons entre notes
+	float tempo = 1.0;
 
 };
 

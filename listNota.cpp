@@ -1,6 +1,6 @@
 #include "utils.hpp"
 
-listNota::listNota(int tempo) {
+listNota::listNota(float tempo) {
 	this.tempo = tempo;
 }
 
@@ -11,6 +11,7 @@ void listNota::newNota() {
 	it.insert(nota);
 }
 
-int listNota::getTempo() {
+
+float listNota::getTempo(){
 	return tempo;
 }
