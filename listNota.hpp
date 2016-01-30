@@ -6,11 +6,11 @@ class listNota {
 public:
 	void newNota();
 	listNota(int freq);
-
+	int getTempo();
 
 private:
 	std::list<Nota> listNotas;
-	int freq;
+	int tempo;
 
 };
 

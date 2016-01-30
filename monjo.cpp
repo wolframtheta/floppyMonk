@@ -25,3 +25,7 @@ void Monjo::downLvlConc(bool b) {
     if (b) lvlConc -= 5;
     else lvlConc -= 2;
 }
+
+int Monjo::getLvlConc() {
+    return lvlConc;
+}

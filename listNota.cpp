@@ -1,7 +1,7 @@
 #include "utils.hpp"
 
-listNota::listNota(int freq) {
-	this.freq = freq;
+listNota::listNota(int tempo) {
+	this.tempo = tempo;
 }
 
 void listNota::newNota() {
@@ -9,4 +9,8 @@ void listNota::newNota() {
 	it = listNotas.end();
 	Nota nota(rand() % 4 +1);
 	it.insert(nota);
+}
+
+int listNota::getTempo() {
+	return tempo;
 }
