@@ -7,10 +7,6 @@ Game::Game(sf::RenderWindow* window):_mywindow(window){
 
 }
 
-void Game::nextMove(){
-	
-}
-
 void Game::play(){
 	
 	listNota musica;
@@ -23,12 +19,12 @@ void Game::play(){
 	sf::Clock clock;
 	sf::Time time = sf::seconds(0);
 	
-	while(jugador.getLvlCon() != 0){
-		if  (clock.getElapsedTime().asSeconds() == tempo) {
+	while(jugador.getLvlCon() > 0){
+		if  (clock.getElapsedTime().asSeconds() >= tempo) {
 			time = clock.restart();
-			nextMove();
+			musica.newNota();
 		}
-		
+		//events
 	}
 	
 }

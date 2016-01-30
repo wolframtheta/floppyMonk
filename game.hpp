@@ -6,9 +6,6 @@ public:
 	
 	Game(sf::RenderWindow* window);
 	
-	//crea nota, afageix a la llista i avança el ""temps"" del joc
-	void nextMove();
-	
 	void play();	
 	
 

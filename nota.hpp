@@ -8,7 +8,9 @@ public:
     Nota(int);
     ~Nota();
 
-	void dibuixarNota(sf::RenderWindow* window);    
+	void dibuixarNota(sf::RenderWindow* window);
+	void update();
+	bool fora();
     //fer sonar la nota
         
 private:

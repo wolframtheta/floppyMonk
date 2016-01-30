@@ -8,10 +8,10 @@ public:
 	listNota();
 	void newNota();
 	float getTempo();
-
+	void update();
 
 private:
-	std::list<Nota> listNotas;
+	std::list<Nota> listNotes;
 	
 	//el tempo conta segons entre notes
 	float tempo = 1.0;
