@@ -43,8 +43,8 @@ void Game::play(){
 		}
 		else if (not sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) pressQ = true;
 		
-		if (not encert) jugador.downLvlConc(false);
-		else jugador.upLvlConc();
+		//if (not encert) jugador.downLvlConc(false);
+		//else jugador.upLvlConc();
 		
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) and pressW){
 			encert = musica.encertaNota(2);
@@ -52,8 +52,8 @@ void Game::play(){
 		}
 		else if (not sf::Keyboard::isKeyPressed(sf::Keyboard::W)) pressW = true;
 				
-		if (not encert) jugador.downLvlConc(false);
-		else jugador.upLvlConc();
+		//if (not encert) jugador.downLvlConc(false);
+		//else jugador.upLvlConc();
 		
 		   
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::E) and pressE){
@@ -62,8 +62,8 @@ void Game::play(){
 		}
 		else if (not sf::Keyboard::isKeyPressed(sf::Keyboard::E)) pressE = true;
 		
-		if (not encert) jugador.downLvlConc(false);
-		else jugador.upLvlConc();
+		//if (not encert) jugador.downLvlConc(false);
+		//else jugador.upLvlConc();
 				   
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::R) and pressR){
 			encert = musica.encertaNota(4);
@@ -71,8 +71,8 @@ void Game::play(){
 		}
 		else if (not sf::Keyboard::isKeyPressed(sf::Keyboard::R)) pressR = true;
 		
-		if (not encert) jugador.downLvlConc(false);
-		else jugador.upLvlConc();
+		//f (not encert) jugador.downLvlConc(false);
+		//else jugador.upLvlConc();
 		
 		bool notaPerduda = false;
 		notaPerduda = musica.update();
