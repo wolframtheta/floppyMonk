@@ -54,6 +54,7 @@ void Menu::run(){
                 sf::IntRect cursorAim(mousepos.x-1,mousepos.y-1,2,2);
                 if (cursorAim.intersects(Rplay)){
                     std::cout << "Play ok!" << std::endl;
+                    
                     //Hide buttons
                     //joc.play()
                     //Show buttons
