@@ -14,7 +14,7 @@ void Menu::run(){
     bg.setPosition(0,0);
     
     sf::Texture bgPlay;
-    if (!bgPlay.loadFromFile(file_play)) std::cout << "Error loading spriteSheet" << std::endl;
+    if (!bgPlay.loadFromFile(file_play)) std::cout << "Error loading Play button" << std::endl;
     
     sf::RectangleShape play;
     play.setTexture(&bgPlay);
@@ -24,7 +24,7 @@ void Menu::run(){
     
 
     sf::Texture bgCredits;
-    if (!bgCredits.loadFromFile(file_credits)) std::cout << "Error loading spriteSheet" << std::endl;
+    if (!bgCredits.loadFromFile(file_credits)) std::cout << "Error loading Credits button" << std::endl;
     
     sf::RectangleShape credits;
     credits.setTexture(&bgCredits);
@@ -34,7 +34,7 @@ void Menu::run(){
    
 
    sf::Texture bgExit;
-    if (!bgExit.loadFromFile(file_exit)) std::cout << "Error loading spriteSheet" << std::endl;
+    if (!bgExit.loadFromFile(file_exit)) std::cout << "Error loading Exit button" << std::endl;
     
     
     
@@ -127,7 +127,7 @@ void Menu::run(){
                     //Roll credits
                     sf::Font font;
                     if (!font.loadFromFile("./resources/RemachineScript_Personal_Use.ttf")) std::cout << "Failed to load font" << std::endl;
-                    sf::Text creditText("GameJam Barcelona Dos Mil Setze\n Creado Por: \nXavier --- \n Xavier --- \n Marti --- \n Ruben Cano Diaz",font,100);
+                    sf::Text creditText("GameJam Barcelona\n Creado Por: \n          Xavier --- \n          Xavier Penalosa \n          Marti --- \n          Ruben Cano Diaz",font,100);
                     creditText.setColor(sf::Color(255,255,255));
                     for (int i = W_HEIGHT;i>0;i-=4){
                         
