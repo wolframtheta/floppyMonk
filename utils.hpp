@@ -32,11 +32,7 @@
 using namespace std;
 
 
-<<<<<<< HEAD
-static const char* name_monjo = "";
-=======
 static const sf::Texture spriteSheet;
->>>>>>> 3f4231665285c74082a84c8847ef62f4e48052e9
 
 
 #endif // UTILS_HPP
