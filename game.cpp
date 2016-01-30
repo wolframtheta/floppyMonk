@@ -24,10 +24,14 @@ void Game::play(){
 	bool pressQ = true, pressW = true, pressE = true, pressR = true;
 	
 	while(jugador.getLvlConc() > 0){
+		
 		if  (clock.getElapsedTime().asSeconds() >= tempo) {
 			time = clock.restart();
 			musica.newNota();
 		}
+		
+		jugador.update();
+		
 		
 		bool encert = false;
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q) and pressQ){
