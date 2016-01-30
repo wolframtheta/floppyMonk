@@ -5,7 +5,7 @@ Monjo::Monjo() {
     spr.setTexture(spriteSheet);
 	//spr.setTextureRect(a,b,c,d); falta posar les dimensions del rectangle aka REKT!!
 	
-    lvlConc = 0;
+    lvlConc = 1;
 	spr.setPosition(W_WIDTH/2,W_HEIGHT*2/3);
 }
 

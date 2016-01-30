@@ -5,12 +5,15 @@ class Game {
 public:
 	
 	Game(sf::RenderWindow* window);
-	void play();
+	
+	//crea nota, afageix a la llista i avança el ""temps"" del joc
+	void nextMove();
+	
+	void play();	
+	
 
 private:
-
-	Monjo jugador;
-	listNota musica;
+	
 	sf::Sprite bg;
 	sf::RenderWindow* _myWindow;
 
