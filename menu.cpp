@@ -109,16 +109,16 @@ void Menu::run(){
                     //Roll credits
                     sf::Font font;
                     if (!font.loadFromFile("./resources/RemachineScript_Personal_Use.ttf")) std::cout << "Failed to load font" << std::endl;
-                    sf::Text creditText("GameJam Barcelona Dos Mil Setze",font,100);
+                    sf::Text creditText("GameJam Barcelona Dos Mil Setze\n Creado Por: \nXavier --- \n Xavier --- \n Marti --- \n Ruben Cano Diaz",font,100);
                     creditText.setColor(sf::Color(255,255,255));
-                    for (int i = W_HEIGHT;i>0;i--){
+                    for (int i = W_HEIGHT;i>0;i-=4){
                         
                         
                         
                         window.clear();
                         window.draw(bg);
                         
-                        creditText.setPosition((float)W_WIDTH/2-W_WIDTH/3/2,(float)i/2);
+                        creditText.setPosition((float)350,(float)i);
                         window.draw(creditText);
                         
                         sf::Event event2;
