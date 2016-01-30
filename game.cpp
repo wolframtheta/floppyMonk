@@ -35,7 +35,19 @@ void Game::play(){
 	bool pressQ = true, pressW = true, pressE = true, pressR = true;
         bool exitLoop = false;
 	
-		
+				sf::SoundBuffer buffer;
+		sf::Sound soundQ;
+		buffer.loadFromFile("./resources/music/46.wav");
+		soundQ.setBuffer(buffer);
+		sf::Sound soundW;
+		buffer.loadFromFile("./resources/music/46.wav");
+		soundW.setBuffer(buffer);
+		sf::Sound soundE;
+		buffer.loadFromFile("./resources/music/46.wav");
+		soundE.setBuffer(buffer);
+		sf::Sound soundR;
+		buffer.loadFromFile("./resources/music/46.wav");
+		soundR.setBuffer(buffer);
 	while(monjo.getLvlConc() > 0 and not exitLoop){ //Player alive
 		
                 sf::Event event;
@@ -64,19 +76,7 @@ void Game::play(){
 		
 		bool encert = false;
 
-		sf::SoundBuffer buffer;
-		sf::Sound soundQ;
-		buffer.loadFromFile("./resources/music/46.wav");
-		soundQ.setBuffer(buffer);
-		sf::Sound soundW;
-		buffer.loadFromFile("./resources/music/46.wav");
-		soundW.setBuffer(buffer);
-		sf::Sound soundE;
-		buffer.loadFromFile("./resources/music/46.wav");
-		soundE.setBuffer(buffer);
-		sf::Sound soundR;
-		buffer.loadFromFile("./resources/music/46.wav");
-		soundR.setBuffer(buffer);
+
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q) and pressQ){
 			soundQ.play();
