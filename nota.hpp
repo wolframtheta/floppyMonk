@@ -12,6 +12,7 @@ public:
 	void update();
 	bool fora();
 	bool encert(sf::IntRect);
+	int getType();
     //void playmusic(); fer sonar la nota
         
 private:

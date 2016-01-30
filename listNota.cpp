@@ -3,6 +3,10 @@
 listNota::listNota(){
 	
 	tempo = 1;
+	zona.left = 1520;
+	zona.top = W_HEIGHT*3/4+20;
+	zona.width = 380;
+	zona.height = 80;
 	
 }
 
@@ -23,7 +27,7 @@ bool listNota::update(){
 	while (it != listNotes.end()){
 		(*it).update();
 		if ((*it).fora()){
-			(*it).erase;
+			listNotes.erase(it);
 			it--;
 			notaPerduda = true;
 		}
@@ -41,9 +45,9 @@ bool listNota::encertaNota(int type){
 	std::list<Nota>::iterator it = listNotes.begin();
 	while (it != listNotes.end() and not trobada){
 		if ((*it).getType() == type){
-			if ((*it).encert()){
+			if ((*it).encert(zona)){
 				//(*it).playmusic;			TO DO
-				(*it).erase;
+				listNotes.erase(it);
 				it--;
 				trobada = true;
 			}

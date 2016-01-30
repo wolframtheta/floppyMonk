@@ -1,8 +1,11 @@
 #include "utils.hpp"
 
-Game::Game(sf::RenderWindow* window):_mywindow(window){
+Game::Game(sf::RenderWindow* window): _myWindow(window){
 	
-	bg.setTexture(spriteSheet);
+	
+	sf::Texture bgT;
+	if (!bgT.loadFromFile(file_bg)) std::cout << "Error loading spriteSheet" << std::endl;
+    bg.setTexture(bgT);
 	//bg.setTextureRect(a,b,c,d); falta posar les dimensions del rectangle aka REKT!!
 
 }
@@ -20,7 +23,7 @@ void Game::play(){
 	sf::Time time = sf::seconds(0);
 	bool pressQ = true, pressW = true, pressE = true, pressR = true;
 	
-	while(jugador.getLvlCon() > 0){
+	while(jugador.getLvlConc() > 0){
 		if  (clock.getElapsedTime().asSeconds() >= tempo) {
 			time = clock.restart();
 			musica.newNota();
@@ -28,7 +31,7 @@ void Game::play(){
 		
 		bool encert = false;
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q) and pressQ){
-			encert = llistaNotes.encertaNota(1);
+			encert = musica.encertaNota(1);
 			pressQ = false;
 		}
 		else if (not sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) pressQ = true;
@@ -37,29 +40,29 @@ void Game::play(){
 		else jugador.upLvlConc();
 		
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) and pressW){
-			encert = llistaNotes.encertaNota(2);
-			pressW = false
+			encert = musica.encertaNota(2);
+			pressW = false;
 		}
-		else if (not sf::Keyboard::isKeyPressed(sf::Keyboard::W) pressW = true;
+		else if (not sf::Keyboard::isKeyPressed(sf::Keyboard::W)) pressW = true;
 				
 		if (not encert) jugador.downLvlConc(false);
 		else jugador.upLvlConc();
 		
 		   
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::E) and pressE){
-			encert = llistaNotes.encertaNota(3);
+			encert = musica.encertaNota(3);
 			pressE = false;
 		}
-		else if (not sf::Keyboard::isKeyPressed(sf::Keyboard::E) pressE = true;
+		else if (not sf::Keyboard::isKeyPressed(sf::Keyboard::E)) pressE = true;
 		
 		if (not encert) jugador.downLvlConc(false);
 		else jugador.upLvlConc();
 				   
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::R) and pressR){
-			encert = llistaNotes.encertaNota(4);
+			encert = musica.encertaNota(4);
 			pressR = false;
 		}
-		else if (not sf::Keyboard::isKeyPressed(sf::Keyboard::R) pressR = true;
+		else if (not sf::Keyboard::isKeyPressed(sf::Keyboard::R)) pressR = true;
 		
 		if (not encert) jugador.downLvlConc(false);
 		else jugador.upLvlConc();

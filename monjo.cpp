@@ -4,7 +4,7 @@ Monjo::Monjo() {
 	
     //spr.setTexture(spriteSheet);
 	//spr.setTextureRect(a,b,c,d); falta posar les dimensions del rectangle aka REKT!!
-	spr.setSize(150,100);
+	spr.setSize(sf::Vector2f(150,100));
 	spr.setFillColor(sf::Color(0,0,0));
 	
 	
@@ -27,9 +27,9 @@ int Monjo::getLvlConc() {
     return lvlConc;
 }
 
-void Monjo::update(RenderWindow* window){
+void Monjo::update(sf::RenderWindow* window){
 	
-	window.draw(spr);
+	window->draw(spr);
 	
 	
 }

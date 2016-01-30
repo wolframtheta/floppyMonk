@@ -8,14 +8,15 @@ public:
 	listNota();
 	void newNota();
 	float getTempo();
-	void update();
+	bool update();
 	bool encertaNota(int);
 
 private:
 	std::list<Nota> listNotes;
 	
 	//el tempo conta segons entre notes
-	float tempo ;
+	float tempo;
+	sf::IntRect zona;
 
 };
 
