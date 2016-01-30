@@ -48,8 +48,7 @@ void Menu::run(){
         buffer.loadFromFile("./resources/music/BSong.ogg");
         backgroundS.setBuffer(buffer);
         backgroundS.play();
-     
-    
+            
 
     
     while (window.isOpen()){
