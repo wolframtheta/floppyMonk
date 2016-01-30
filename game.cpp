@@ -11,6 +11,19 @@ Game::Game(sf::RenderWindow* window): _myWindow(window){
 }
 
 void Game::play(){
+
+		//elo system
+		int racha = 0;
+		int multiplicador = 1;
+		int falladas = 0;
+		int max_combo = 0;
+		int acertadas = 0;
+		int mana = 0;
+		sf::Clock GameTime; // starts the clock
+
+		//
+
+
         sf::Texture bgT;
 	if (!bgT.loadFromFile(file_bg)) std::cout << "Error loading spriteSheet" << std::endl;
         bg.setTexture(bgT);
@@ -55,16 +68,16 @@ void Game::play(){
 
     	sf::SoundBuffer buffer1, buffer2, buffer3, buffer4;
 		sf::Sound soundQ;
-		buffer1.loadFromFile("./resources/music/1.wav");
+		buffer1.loadFromFile("./resources/music_n/1.wav");
 		soundQ.setBuffer(buffer1);
 		sf::Sound soundW;
-		buffer2.loadFromFile("./resources/music/15.wav");
+		buffer2.loadFromFile("./resources/music_n/2.wav");
 		soundW.setBuffer(buffer2);
 		sf::Sound soundE;
-		buffer3.loadFromFile("./resources/music/34.wav");
+		buffer3.loadFromFile("./resources/music_n/3.ogg");
 		soundE.setBuffer(buffer3);
 		sf::Sound soundR;
-		buffer4.loadFromFile("./resources/music/48.wav");
+		buffer4.loadFromFile("./resources/music_n/4.wav");
 		soundR.setBuffer(buffer4);
 
 		
@@ -100,8 +113,21 @@ void Game::play(){
 			soundQ.play();
 			encert = musica.encertaNota(1);
 			pressQ = false;
-			if (not encert) monjo.downLvlConc(false);
-			else monjo.upLvlConc();
+			if (not encert)
+			{
+				monjo.downLvlConc(false);
+				racha=0;
+				falladas--;
+				multiplicador=1;
+
+			}
+			else 
+			{
+				monjo.upLvlConc();
+				racha++;
+				acertadas++;
+				mana= mana + 2*multiplicador; //2 puntos sin multiplicador.
+			}
 
 		}
 		else if (not sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) pressQ = true;
@@ -111,8 +137,22 @@ void Game::play(){
 			soundW.play();
 			encert = musica.encertaNota(2);
 			pressW = false;
-			if (not encert) monjo.downLvlConc(false);
-		else monjo.upLvlConc();
+			if (not encert)
+			{
+				monjo.downLvlConc(false);
+				racha=0;
+				falladas--;
+				multiplicador=1;
+
+			}
+			else 
+			{
+				monjo.upLvlConc();
+				racha++;
+				acertadas++;
+				mana= mana + 2*multiplicador; //2 puntos sin multiplicador.
+
+			}
 
 		}
 		else if (not sf::Keyboard::isKeyPressed(sf::Keyboard::W)) pressW = true;
@@ -122,8 +162,22 @@ void Game::play(){
 			soundE.play();
 			encert = musica.encertaNota(3);
 			pressE = false;
-			if (not encert) monjo.downLvlConc(false);
-			else monjo.upLvlConc();
+			if (not encert)
+			{
+				monjo.downLvlConc(false);
+				racha=0;
+				falladas--;
+				multiplicador=1;
+
+			}
+			else 
+			{
+				monjo.upLvlConc();
+				racha++;
+				acertadas++;
+				mana= mana + 2*multiplicador; //2 puntos sin multiplicador.
+
+			}
 
 		}
 		else if (not sf::Keyboard::isKeyPressed(sf::Keyboard::E)) pressE = true;
@@ -132,8 +186,22 @@ void Game::play(){
 			soundR.play();
 			encert = musica.encertaNota(4);
 			pressR = false;
-			if (not encert) monjo.downLvlConc(false);
-			else monjo.upLvlConc();
+			if (not encert)
+			{
+				monjo.downLvlConc(false);
+				racha=0;
+				falladas--;
+				multiplicador=1;
+
+			}
+			else 
+			{
+				monjo.upLvlConc();
+				racha++;
+				acertadas++;
+				mana= mana + 2*multiplicador; //2 puntos sin multiplicador.
+
+			}
 
 		}
 		else if (not sf::Keyboard::isKeyPressed(sf::Keyboard::R)) pressR = true;
@@ -173,6 +241,17 @@ void Game::play(){
 		
 		musica.setTempo(vel[(monjo.getLvlConc()-1)/25]);
 		std::cout<<musica.getTempo()<<std::endl;
+
+
+		////puntuacuiones
+		if(racha>max_combo) max_combo=racha;
+
+		if(racha<=5) multiplicador = 2;
+		else if (racha<=12) multiplicador = 3;
+		else if (racha<=17) multiplicador = 4;
+		else if (racha<=24) multiplicador = 5;
+		else multiplicador = 6;
+		///
 	}
 
 

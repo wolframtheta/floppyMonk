@@ -73,5 +73,5 @@ int Monjo::getHp() {
 
 void Monjo::regHp() {
     overflow+=3;
-    if (overflow<=-124)++health;
+    if (overflow<=-124 and health<100)++health;
 }
