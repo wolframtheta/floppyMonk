@@ -31,7 +31,9 @@
 #define APP_NAME "Floppy Monk"
 
 
-static const sf::Texture spriteSheet;
 
+
+static const char* file_monjo = "";
+static const char* file_bg = "./resources/Img_T_Game.jpg";
 
 #endif // UTILS_HPP

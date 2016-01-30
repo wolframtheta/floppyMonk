@@ -2,16 +2,16 @@
 
 void Menu::run(){
     
-    sf::RenderWindow window(sf::VideoMode(W_WIDTH, W_HEIGHT), APP_NAME);
+    sf::RenderWindow window(sf::VideoMode(W_WIDTH, W_HEIGHT), APP_NAME, sf::Style::Fullscreen);
     window.setFramerateLimit(60);
-    //sf::Texture spriteSheet;
-    //if (!spriteSheet.loadFromFile("./images/spriteSheet.jpg")) std::cout << "Error loading spriteSheet" << std::endl;
+    sf::Texture bgT;
+    if (!bgT.loadFromFile("./resources/Img_T_Game.jpg")) std::cout << "Error loading spriteSheet" << std::endl;
     
     sf::RectangleShape bg;
-    //bg.setTexture(spriteSheet);
     //bg.setTextureRect(posx,posy,midax,miday)
-    bg.setFillColor(sf::Color(0,0,0));
-    
+    bg.setTexture(&bgT);
+    bg.setSize(sf::Vector2f(W_WIDTH, W_HEIGHT));
+    bg.setPosition(0,0);
     
     sf::RectangleShape play;
     play.setFillColor(sf::Color(255,255,255));
@@ -41,13 +41,26 @@ void Menu::run(){
         
         
         sf::Event event;
+        bool fullscreen;
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return) && sf::Keyboard::isKeyPressed(sf::Keyboard::LAlt)) {
+            fullscreen = !fullscreen;
+            window.create(sf::VideoMode(W_WIDTH, W_HEIGHT), APP_NAME, (fullscreen ? sf::Style::Fullscreen : sf::Style::Resize|sf::Style::Close));
+        }
         while (window.pollEvent(event)){
+
+            //Exit
+            
+            //Fullscreen toggle
+            
+
             if (event.type == sf::Event::Closed) window.close();
             if (event.type == sf::Event::KeyPressed){
                 if (event.key.code == sf::Keyboard::Escape){
                     window.close();
                 }
             }
+           
+
             
             if (event.type == sf::Event::MouseButtonReleased){
                 sf::Vector2i mousepos = sf::Mouse::getPosition(window);
@@ -69,7 +82,7 @@ void Menu::run(){
                     //Roll credits
                     sf::Font font;
                     if (!font.loadFromFile("./resources/RemachineScript_Personal_Use.ttf")) std::cout << "Failed to load font" << std::endl;
-                    sf::Text creditText("GameJam Barcelona 2016",font,60);
+                    sf::Text creditText("GameJam Barcelona 2016",font,100);
                     creditText.setColor(sf::Color(255,255,255));
                     for (int i = W_HEIGHT;i>0;i--){
                         
@@ -78,7 +91,7 @@ void Menu::run(){
                         window.clear();
                         window.draw(bg);
                         
-                        creditText.setPosition((float)W_WIDTH/5,(float)i/2);
+                        creditText.setPosition((float)W_WIDTH/2-W_WIDTH/3/2,(float)i/2);
                         window.draw(creditText);
                         
                         sf::Event event2;
