@@ -73,6 +73,7 @@ void Game::play(){
 		if  (clock.getElapsedTime().asSeconds() >= tempo) {
 			time = clock.restart();
 			musica.newNota();
+			
 		}
 		
 		monjo.update();
@@ -128,11 +129,20 @@ void Game::play(){
 		if (notaPerduda) monjo.downLvlConc(true);
 		std::list<Nota>::iterator it = musica.listNotes.begin();
 		while (it != musica.listNotes.end()){
-                    spriteNota.setPosition((*it).getPosition());
+                    
+					
+	spriteNota.setTextureRect(sf::IntRect(((*it).getType()-1)*80,120,80,80));
+	
+	spriteNota.setPosition(sf::Vector2f((*it).getPos().x + ((*it).getType()-1)*100, (*it).getPos().y));
+	
+					
                     _myWindow->draw(spriteNota);
                     it++;
                 }
 		
+		
+		
+			
 		_myWindow->display();
 		
 	}
