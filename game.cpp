@@ -80,11 +80,11 @@ void Game::play(){
 
 	while(monjo.getHp() > 0 and not exitLoop){ //Player alive
 			
-                sf::Event event;
-                while (_myWindow->pollEvent(event)){
-                    if (event.type == sf::Event::Closed) exitLoop = true;
-                    if (event.type == sf::Event::KeyPressed){
-                        if (event.key.code == sf::Keyboard::Escape){
+                sf::Event event3;
+                while (_myWindow->pollEvent(event3)){
+                    if (event3.type == sf::Event::Closed) exitLoop = true;
+                    if (event3.type == sf::Event::KeyPressed){
+                        if (event3.key.code == sf::Keyboard::Escape){
                             exitLoop = true;
                         }
                     }    
