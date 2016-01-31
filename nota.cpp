@@ -10,10 +10,6 @@ Nota::Nota(int nota,bool left){
 	type = nota;
         uiop = left;
 	
-	
-/*	float posx = 1920-400+20*type+40*(type-1);
-	float posy = -40;*/
-	
 	if (uiop) {
             pos.x = posRectangle2.x + 20;
             pos.y = -40;
