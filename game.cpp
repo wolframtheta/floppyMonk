@@ -42,6 +42,7 @@ void Game::play(){
             if (!monjoT.loadFromFile(file_monjo)) std::cout << "Failed to load monjo" << std::endl;
         sf::Sprite player;
             player.setTexture(monjoT);
+        int badHitTimeout;
 	
 //Creem el monjo i les dues llistes de notes            
             
@@ -136,6 +137,8 @@ void Game::play(){
                 }
             }
             
+            if (badHitTimeout>0) badHitTimeout--;
+
         //Event3
             sf::Event event3;
             while (_myWindow->pollEvent(event3)){
@@ -188,13 +191,7 @@ void Game::play(){
                         soundQ.play();
                         encert = musica1.encertaNota(1);
                         pressQ = false;
-                        if (not encert) {
-                            monjo.downLvlConc(false);
-                            racha=0;
-                            falladas++;
-                            multiplicador=1;
-                                //wrongTile();
-                        }
+                        if (not encert) falladas++;
                         else {
                             monjo.upLvlConc();
                             racha++;
@@ -203,20 +200,13 @@ void Game::play(){
                         }
                     }
                     else if (not sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) pressQ = true;
-                }
-
+                } 
                 if (canW){
                     if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) and pressW){
                             soundW.play();
                             encert = musica1.encertaNota(2);
                             pressW = false;
-                            if (not encert){
-                                    monjo.downLvlConc(false);
-                                    racha=0;
-                                    falladas++;
-                                    multiplicador=1;
-
-                            }
+                            if (not encert) falladas++;
                             else {
                                     monjo.upLvlConc();
                                     racha++;
@@ -234,13 +224,7 @@ void Game::play(){
                             soundE.play();
                             encert = musica1.encertaNota(3);
                             pressE = false;
-                            if (not encert){
-                                    monjo.downLvlConc(false);
-                                    racha=0;
-                                    falladas++;
-                                    multiplicador=1;
-
-                            }
+                            if (not encert) falladas++;
                             else {
                                     monjo.upLvlConc();
                                     racha++;
@@ -258,13 +242,7 @@ void Game::play(){
                             soundR.play();
                             encert = musica1.encertaNota(4);
                             pressR = false;
-                            if (not encert) {
-                                    monjo.downLvlConc(false);
-                                    racha=0;
-                                    falladas++;
-                                    multiplicador=1;
-
-                            }
+                            if (not encert)  falladas++;
                             else {
                                     monjo.upLvlConc();
                                     racha++;
@@ -282,12 +260,7 @@ void Game::play(){
                         soundQ.play();
                         encert = musica2.encertaNota(1);
                         pressU = false;
-                        if (not encert){
-                                monjo.downLvlConc(false);
-                                racha=0;
-                                falladas++;
-                                multiplicador=1;
-                        }
+                        if (not encert) falladas++;
                         else {
                             monjo.upLvlConc();
                             racha++;
@@ -303,12 +276,7 @@ void Game::play(){
                         soundW.play();
                         encert = musica2.encertaNota(2);
                         pressI = false;
-                        if (not encert){
-                            monjo.downLvlConc(false);
-                            racha=0;
-                            falladas++;
-                            multiplicador=1;
-                        }
+                        if (not encert) falladas++;
                         else {
                             monjo.upLvlConc();
                             racha++;
@@ -324,12 +292,7 @@ void Game::play(){
                         soundE.play();
                         encert = musica2.encertaNota(3);
                         pressO = false;
-                        if (not encert){
-                            monjo.downLvlConc(false);
-                            racha=0;
-                            falladas++;
-                            multiplicador=1;
-                        }
+                        if (not encert) falladas++;
                         else {
                             monjo.upLvlConc();
                             racha++;
@@ -345,13 +308,7 @@ void Game::play(){
                         soundR.play();
                         encert = musica2.encertaNota(4);
                         pressP = false;
-                        if (not encert){
-                                    monjo.downLvlConc(false);
-                                    racha=0;
-                                    falladas++;
-                                    multiplicador=1;
-
-                            }
+                        if (not encert) falladas++;
                     else 
                     {
                             monjo.upLvlConc();
@@ -365,22 +322,22 @@ void Game::play(){
 
                 bool notaPerduda = false;
                 notaPerduda = musica1.update() or musica2.update();
-                if (notaPerduda) {
-                        monjo.downLvlConc(true);
-                        racha = 0;
-                        falladas++;
-                        multiplicador = 1;
-                }
+                if (notaPerduda) falladas++;
 
                 int spx;
-                if (falladas > oldFalladas) spx = 1280;
-                else {
-                    if (monjo.getLvlConc()<62.5) spx = 0;
-                    else if (monjo.getLvlConc()<125) spx = 320;
-                    else if (monjo.getLvlConc()<187.5) spx = 640;
-                    else spx = 960;
-                    
+                if (falladas > oldFalladas){
+                	badHitTimeout = 15;
+                	monjo.downLvlConc(false);
+                    racha=0;
+                    multiplicador=1;
                 }
+                if (badHitTimeout==0){
+                	if (monjo.getLvlConc()<62.5) spx = 0;
+	                else if (monjo.getLvlConc()<125) spx = 320;
+	                else if (monjo.getLvlConc()<187.5) spx = 640;
+	                else spx = 960;
+	            } else spx = 1280;
+                    
                 player.setPosition(monjo.getPos());
                 player.setTextureRect(sf::IntRect(spx,0,320,320));
                 _myWindow->draw(player);

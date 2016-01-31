@@ -1,9 +1,45 @@
 #include "utils.hpp"
 
+
+void initView(sf::View* view, sf::RenderWindow* _window, sf::Vector2i windowSize) {
+    int windowX = _window->getSize().x, windowY = _window->getSize().y;
+
+    float xr = windowX / float(windowSize.x);
+    float yr = windowY / float(windowSize.y);
+
+    float aux;
+    if (xr < yr) aux = 1/yr;
+    else aux = 1/xr;
+
+    xr *= aux;
+    yr *= aux;
+    sf::Vector2f min,max;
+
+    min.x = (1.f - yr) / 2.f;
+    min.y = (1.f - xr) / 2.f;
+    max.x = 1.f - min.x*2;
+    max.y = 1.f - min.y*2;
+
+    view->reset(sf::FloatRect(0,0,windowSize.x,windowSize.y));
+    view->setViewport(sf::FloatRect(min.x,min.y,max.x,max.y));
+}
+
+
+
+
 void Menu::run(){
     
-    sf::RenderWindow window(sf::VideoMode(W_WIDTH, W_HEIGHT), APP_NAME/*, sf::Style::Fullscreen*/);
+    sf::RenderWindow window(sf::VideoMode::getDesktopMode(), APP_NAME/*, sf::Style::Fullscreen*/);
     window.setFramerateLimit(60);
+
+    sf::View view;
+    view = window.getDefaultView();
+    initView(&view,&window,sf::Vector2i(W_WIDTH,W_HEIGHT));
+
+    window.setView(view);
+
+
+
     sf::Texture bgT;
     if (!bgT.loadFromFile(file_bg)) std::cout << "Error loading spriteSheet" << std::endl;
     
@@ -59,10 +95,7 @@ void Menu::run(){
     title.setPosition(W_WIDTH/2-W_WIDTH/3/2 + W_WIDTH/3 + 350,W_HEIGHT*2/5-W_HEIGHT/7/2 + W_HEIGHT/7 + 300);
     title.setColor(sf::Color(254,238,0));
     title.setOrigin(245,177);
-        sf::RectangleShape Rhtp;
-        Rhtp.setPosition(W_WIDTH/2-W_WIDTH/3/2 + W_WIDTH/3 + 95,W_HEIGHT*2/5-W_HEIGHT/7/2 + W_HEIGHT/7 + 122);
-        Rhtp.setSize(sf::Vector2f(491,355));
-    Rhtp.setFillColor(sf::Color(0,0,0));
+        sf::IntRect Rhtp(W_WIDTH/2-W_WIDTH/3/2 + W_WIDTH/3 + 95,W_HEIGHT*2/5-W_HEIGHT/7/2 + W_HEIGHT/7 + 122,491,355);
 
     bool rotateLeft = true;
     int d = -7;
@@ -88,8 +121,16 @@ void Menu::run(){
         }
         else if (!rotateLeft && d == -7) rotateLeft = true;
 
-            window.draw(bg);
-            window.draw(title);
+                    window.draw(bg);
+        window.draw(play);
+        window.draw(credits);
+        window.draw(title);
+        window.draw(exit);
+        
+        
+        
+        
+        window.display();
         while (window.pollEvent(event)){
 
             //Exit
@@ -136,6 +177,7 @@ void Menu::run(){
 						window.draw(bg);
 						window.draw(play);
 						window.draw(credits);
+                        window.draw(title);
 						window.draw(exit);
 						
 						fadeRct.setFillColor(sf::Color(0,0,0,i));
@@ -191,24 +233,29 @@ void Menu::run(){
                 else if (cursorAim.intersects(Rexit)){
                     window.close();
                 }
-                /*else if (cursorAim.intersects(Rhtp)) {
+                else if (cursorAim.intersects(Rhtp)) {
                     cout << "how to play" << endl;
-                }*/
+
+                    play.setPosition(-500,-500);
+                    credits.setPosition(-500,-500);
+                    exit.setPosition(-500,-500);
+
+                    window.clear();
+
+                    sf::Texture bgHTP;
+                    if (!bgHTP.loadFromFile(file_bgHTP)) std::cout << "Error loading spriteSheet" << std::endl;
+                    sf::Sprite bgS;
+                    bgS.setTexture(bgHTP);
+
+                    window.draw(bgS);
+                    window.display();
+                    while(1);
+                }
             }
             
         }
 
-        window.draw(bg);
-        window.draw(play);
-        window.draw(credits);
-        window.draw(title);
-        window.draw(Rhtp);
-        window.draw(exit);
-        
-        
-        
-        
-        window.display();
+
     }
     
 }

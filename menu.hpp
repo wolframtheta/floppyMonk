@@ -13,6 +13,7 @@ public:
     
 private:
     
+    
     /*sf::Texture spriteSheet;
     
     sf::RectangleShape bg;
