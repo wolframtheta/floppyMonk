@@ -50,7 +50,20 @@ void Menu::run(){
         backgroundS.play();
             
 
+    sf::Texture titleHTPT;
+    if (!titleHTPT.loadFromFile(file_titleHTP)) cout << "Error loading how to play title image" << endl;
+
+    sf::Sprite title;
+    title.setTexture(titleHTPT);
     
+    title.setPosition(W_WIDTH/2-W_WIDTH/3/2 + W_WIDTH/3 + 350,W_HEIGHT*2/5-W_HEIGHT/7/2 + W_HEIGHT/7 + 300);
+    title.setColor(sf::Color(254,238,0));
+    title.setOrigin(245,177);
+    sf::IntRect Rhtp(W_WIDTH/2-W_WIDTH/3/2 + W_WIDTH/3 + 350,W_HEIGHT*2/5-W_HEIGHT/7/2 + W_HEIGHT/7 + 300,491,355);
+
+
+    bool rotateLeft = true;
+    int d = -7;
     while (window.isOpen()){
         window.clear();
         
@@ -61,12 +74,29 @@ void Menu::run(){
             fullscreen = !fullscreen;
             window.create(sf::VideoMode(W_WIDTH, W_HEIGHT), APP_NAME, (fullscreen ? sf::Style::Fullscreen : sf::Style::Resize|sf::Style::Close));
         }*/
+
+        if (rotateLeft && d < 15) {
+            title.setRotation(d);
+            ++d;
+        } else if (rotateLeft && d == 15) 
+            rotateLeft = false;
+        if (!rotateLeft && d > -7) {
+            title.setRotation(d);
+            --d;
+        }
+        else if (!rotateLeft && d == -7) rotateLeft = true;
+
+            window.draw(bg);
+            window.draw(title);
         while (window.pollEvent(event)){
 
             //Exit
             
             //Fullscreen toggle
-            
+
+
+        
+        
 
             if (event.type == sf::Event::Closed) window.close();
             if (event.type == sf::Event::KeyPressed){
@@ -159,14 +189,17 @@ void Menu::run(){
                 else if (cursorAim.intersects(Rexit)){
                     window.close();
                 }
+                else if (cursorAim.intersects(Rhtp)) {
+                    
+                }
             }
             
         }
-        
-        
+
         window.draw(bg);
         window.draw(play);
         window.draw(credits);
+        window.draw(title);
         window.draw(exit);
         
         

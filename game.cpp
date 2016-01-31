@@ -94,6 +94,13 @@ void Game::play(){
             hBRectangle2.setTexture(notaT);
             hBRectangle2.setTextureRect(sf::IntRect(0,0,420,120));
             hBRectangle2.setPosition(posRectangle2);
+ 
+        sf::Sprite keyHint1;
+        	keyHint1.setTexture(notaT);
+        	keyHint1.setPosition(posRectangle.x,posRectangle.y+20);
+        sf::Sprite keyHint2;
+        	keyHint2.setTexture(notaT);
+        	keyHint2.setPosition(posRectangle2.x,posRectangle2.y+20);
 
         sf::Texture glow;
             if (!glow.loadFromFile(file_glow)) std::cout << "Error loading glow" << std::endl;
@@ -104,8 +111,8 @@ void Game::play(){
 
 	while(monjo.getHp() > 0 and not exitLoop){ //Player alive
 
-            if (acertadas > 10) notes_disponibles = 4;
-            if (acertadas > 30) notes_disponibles = 8;
+            if (acertadas >= 10) notes_disponibles = 4;
+            if (acertadas >= 30) notes_disponibles = 8;
             
             if (notes_disponibles>=2){ //QW
                 canQ = true; canW = true;
@@ -133,6 +140,20 @@ void Game::play(){
             _myWindow->clear();
             _myWindow->draw(bg);
 
+            if (notes_disponibles==2){
+            	keyHint1.setTextureRect(sf::IntRect(0,200,210,80));
+            	_myWindow->draw(keyHint1);
+            }
+            else if (notes_disponibles==4){
+				keyHint1.setTextureRect(sf::IntRect(0,200,480,80));
+				_myWindow->draw(keyHint1);
+            }
+            else if (notes_disponibles==8){
+            	keyHint1.setTextureRect(sf::IntRect(0,200,480,80));
+            	keyHint2.setTextureRect(sf::IntRect(0,280,480,80));
+            	_myWindow->draw(keyHint1);
+            	_myWindow->draw(keyHint2);
+            }
             
             if (notes_disponibles>0){ //Key presses
                 int oldFalladas = falladas;
