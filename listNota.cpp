@@ -21,7 +21,7 @@ listNota::listNota(bool l){
 void listNota::newNota(int notesDisponibles) {
     
     if (left) notesDisponibles-=4;
-    
+    else if (notesDisponibles>4) notesDisponibles = 4;
     
     if (notesDisponibles > 0){
             

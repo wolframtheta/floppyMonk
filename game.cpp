@@ -107,7 +107,7 @@ void Game::play(){
             if (acertadas > 10) notes_disponibles = 4;
             if (acertadas > 30) notes_disponibles = 8;
             
-            if (notes_disponibles>=2){
+            if (notes_disponibles>=2){ //QW
                 canQ = true; canW = true;
                 if (notes_disponibles>=4){ //QWER
                     canE = true; canR = true;
