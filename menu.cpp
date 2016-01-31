@@ -30,13 +30,13 @@ void initView(sf::View* view, sf::RenderWindow* _window, sf::Vector2i windowSize
 void Menu::run(){
     
     sf::RenderWindow window(sf::VideoMode::getDesktopMode(), APP_NAME/*, sf::Style::Fullscreen*/);
-    window.setFramerateLimit(60);
+        window.setFramerateLimit(60);
 
     sf::View view;
-    view = window.getDefaultView();
-    initView(&view,&window,sf::Vector2i(W_WIDTH,W_HEIGHT));
+        view = window.getDefaultView();
+        initView(&view,&window,sf::Vector2i(W_WIDTH,W_HEIGHT));
 
-    window.setView(view);
+        window.setView(view);
 
 
 
@@ -45,40 +45,42 @@ void Menu::run(){
     
     sf::RectangleShape bg;
     //bg.setTextureRect(posx,posy,midax,miday)
-    bg.setTexture(&bgT);
-    bg.setSize(sf::Vector2f(W_WIDTH, W_HEIGHT));
-    bg.setPosition(0,0);
+        bg.setTexture(&bgT);
+        bg.setSize(sf::Vector2f(W_WIDTH, W_HEIGHT));
+        bg.setPosition(0,0);
     
     sf::Texture bgPlay;
-    if (!bgPlay.loadFromFile(file_play)) std::cout << "Error loading Play button" << std::endl;
+        if (!bgPlay.loadFromFile(file_play)) std::cout << "Error loading Play button" << std::endl;
     
     sf::RectangleShape play;
-    play.setTexture(&bgPlay);
-    play.setSize(sf::Vector2f(W_WIDTH/3,W_HEIGHT/7));
-    play.setPosition(W_WIDTH/2-W_WIDTH/3/2,W_HEIGHT*1/5-W_HEIGHT/7/2);
-    sf::IntRect Rplay(W_WIDTH/2-W_WIDTH/3/2,W_HEIGHT*1/5-W_HEIGHT/7/2,W_WIDTH/3,W_HEIGHT/7);
+        play.setTexture(&bgPlay);
+        play.setSize(sf::Vector2f(1920/3,1080/7));
+        play.setPosition(1920/3,1080*1/7);
+        play.setOrigin(0,0);
+    sf::IntRect Rplay(1920/3,1080*1/7,1920/3,1080/7);
     
 
     sf::Texture bgCredits;
-    if (!bgCredits.loadFromFile(file_credits)) std::cout << "Error loading Credits button" << std::endl;
+        if (!bgCredits.loadFromFile(file_credits)) std::cout << "Error loading Credits button" << std::endl;
     
     sf::RectangleShape credits;
-    credits.setTexture(&bgCredits);
-    credits.setSize(sf::Vector2f(W_WIDTH/3,W_HEIGHT/7));
-    credits.setPosition(W_WIDTH/2-W_WIDTH/3/2,W_HEIGHT*2/5-W_HEIGHT/7/2);
-    sf::IntRect Rcred(W_WIDTH/2-W_WIDTH/3/2,W_HEIGHT*2/5-W_HEIGHT/7/2,W_WIDTH/3,W_HEIGHT/7);
+        credits.setTexture(&bgCredits);
+        credits.setSize(sf::Vector2f(1920/3,1080/7));
+        credits.setPosition(1920/3,1080*3/7);
+    sf::IntRect Rcred(1920/3,1080*3/7,1920/3,1080/7);
    
 
-   sf::Texture bgExit;
-    if (!bgExit.loadFromFile(file_exit)) std::cout << "Error loading Exit button" << std::endl;
-    
-    
+    sf::Texture bgExit;
+        if (!bgExit.loadFromFile(file_exit)) std::cout << "Error loading Exit button" << std::endl;
     
     sf::RectangleShape exit;
-    exit.setTexture(&bgExit);
-    exit.setSize(sf::Vector2f(W_WIDTH/3,W_HEIGHT/7));
-    exit.setPosition(W_WIDTH/2-W_WIDTH/3/2,W_HEIGHT*3/5-W_HEIGHT/7/2);
-    sf::IntRect Rexit(W_WIDTH/2-W_WIDTH/3/2,W_HEIGHT*3/5-W_HEIGHT/7/2,W_WIDTH/3,W_HEIGHT/7);
+        exit.setTexture(&bgExit);
+        exit.setSize(sf::Vector2f(1920/3,1080/7));
+        exit.setPosition(1920/3,1080*5/7);
+    sf::IntRect Rexit(1920/3,1080*5/7,1920/3,1080/7);
+    
+    
+    
     sf::SoundBuffer buffer;
         sf::Sound backgroundS;
         buffer.loadFromFile("./resources/music/BSong.ogg");
@@ -86,48 +88,18 @@ void Menu::run(){
         backgroundS.play();
             
 
-    sf::Texture titleHTPT;
-    if (!titleHTPT.loadFromFile(file_titleHTP)) cout << "Error loading how to play title image" << endl;
-
-    sf::Sprite title;
-    title.setTexture(titleHTPT);
-    
-    title.setPosition(W_WIDTH/2-W_WIDTH/3/2 + W_WIDTH/3 + 350,W_HEIGHT*2/5-W_HEIGHT/7/2 + W_HEIGHT/7 + 300);
-    title.setColor(sf::Color(254,238,0));
-    title.setOrigin(245,177);
-        sf::IntRect Rhtp(W_WIDTH/2-W_WIDTH/3/2 + W_WIDTH/3 + 95,W_HEIGHT*2/5-W_HEIGHT/7/2 + W_HEIGHT/7 + 122,491,355);
-
-    bool rotateLeft = true;
-    int d = -7;
     while (window.isOpen()){
         window.clear();
         
-        
+
         sf::Event event;
-        /*bool fullscreen;
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return) and sf::Keyboard::isKeyPressed(sf::Keyboard::LAlt)) {
-            fullscreen = !fullscreen;
-            window.create(sf::VideoMode(W_WIDTH, W_HEIGHT), APP_NAME, (fullscreen ? sf::Style::Fullscreen : sf::Style::Resize|sf::Style::Close));
-        }*/
-
-        if (rotateLeft && d < 15) {
-            title.setRotation(d);
-            ++d;
-        } else if (rotateLeft && d == 15) 
-            rotateLeft = false;
-        if (!rotateLeft && d > -7) {
-            title.setRotation(d);
-            --d;
-        }
-        else if (!rotateLeft && d == -7) rotateLeft = true;
-
-                    window.draw(bg);
+        
+        window.draw(bg);
         window.draw(play);
         window.draw(credits);
-        window.draw(title);
         window.draw(exit);
         
-        
+        std::cout << "P " << play.getPosition().x << " " << play.getPosition().y << " " << Rplay.top << " " << Rplay.left << std::endl;
         
         
         window.display();
@@ -164,9 +136,9 @@ void Menu::run(){
                     joc.play();
 					
 					
-                    play.setPosition(W_WIDTH/2-W_WIDTH/3/2,W_HEIGHT*1/5-W_HEIGHT/7/2);
-                    credits.setPosition(W_WIDTH/2-W_WIDTH/3/2,W_HEIGHT*2/5-W_HEIGHT/7/2);
-                    exit.setPosition(W_WIDTH/2-W_WIDTH/3/2,W_HEIGHT*3/5-W_HEIGHT/7/2);
+                    play.setPosition(1920/3,1080*1/7);
+                    credits.setPosition(1920/3,1080*3/7);
+                    exit.setPosition(1920/3,1080*5/7);
 					
 					sf::RectangleShape fadeRct(sf::Vector2f(W_WIDTH,W_HEIGHT));
 					
@@ -177,13 +149,13 @@ void Menu::run(){
 						window.draw(bg);
 						window.draw(play);
 						window.draw(credits);
-                        window.draw(title);
+                        //window.draw(title);
 						window.draw(exit);
 						
 						fadeRct.setFillColor(sf::Color(0,0,0,i));
 						window.draw(fadeRct);
 						window.display();
-						i-=3;
+						i-=5;
 					}
 					
                     //Hide buttons
@@ -200,9 +172,9 @@ void Menu::run(){
                     //Roll credits
                     sf::Font font;
                     if (!font.loadFromFile("./resources/RemachineScript_Personal_Use.ttf")) std::cout << "Failed to load font" << std::endl;
-                    sf::Text creditText("GameJam Barcelona\n Creado Por: \n          Xavier --- \n          Xavier Penalosa \n          Marti --- \n          Ruben Cano Diaz",font,100);
+                    sf::Text creditText("GameJam Barcelona\n Creado Por: \n          Xavier Marques \n          Xavier Penalosa \n          Marti Homes \n          Ruben Cano Diaz",font,100);
                     creditText.setColor(sf::Color(255,255,255));
-                    for (int i = W_HEIGHT;i>0;i-=4){
+                    for (int i = W_HEIGHT;i>-W_HEIGHT/2;i-=7){
                         
                         
                         
@@ -214,10 +186,10 @@ void Menu::run(){
                         
                         sf::Event event2;
                         while (window.pollEvent(event2)){
-                            if (event2.type == sf::Event::Closed) i=-1;
+                            if (event2.type == sf::Event::Closed) i=-3000;
                             if (event2.type == sf::Event::KeyPressed){
                                 if (event2.key.code == sf::Keyboard::Escape){
-                                    i=-1;
+                                    i=-3000;
                                 }
                             }
                         }
@@ -225,15 +197,15 @@ void Menu::run(){
                         
                     }
                     
-                    play.setPosition(W_WIDTH/2-W_WIDTH/3/2,W_HEIGHT*1/5-W_HEIGHT/7/2);
-                    credits.setPosition(W_WIDTH/2-W_WIDTH/3/2,W_HEIGHT*2/5-W_HEIGHT/7/2);
-                    exit.setPosition(W_WIDTH/2-W_WIDTH/3/2,W_HEIGHT*3/5-W_HEIGHT/7/2);
+                    play.setPosition(1920/3,1080*1/7);
+                    credits.setPosition(1920/3,1080*3/7);
+                    exit.setPosition(1920/3,1080*5/7);
                     //Display buttons
                 }
                 else if (cursorAim.intersects(Rexit)){
                     window.close();
                 }
-                else if (cursorAim.intersects(Rhtp)) {
+                /*else if (cursorAim.intersects(Rhtp)) {
                     cout << "how to play" << endl;
 
                     play.setPosition(-500,-500);
@@ -250,7 +222,7 @@ void Menu::run(){
                     window.draw(bgS);
                     window.display();
                     while(1);
-                }
+                }*/
             }
             
         }
