@@ -87,21 +87,51 @@ void Menu::run(){
         backgroundS.play();
             
 
+   /* sf::Texture titleHTPT;
+    if (!titleHTPT.loadFromFile(file_titleHTP)) cout << "Error loading how to play title image" << endl;
+
+    sf::Sprite title;
+    title.setTexture(titleHTPT);
+    
+    title.setPosition(W_WIDTH/2-W_WIDTH/3/2 + W_WIDTH/3 + 350,W_HEIGHT*2/5-W_HEIGHT/7/2 + W_HEIGHT/7 + 300);
+    title.setColor(sf::Color(254,238,0));
+    title.setOrigin(245,177);
+        sf::IntRect Rhtp(W_WIDTH/2-W_WIDTH/3/2 + W_WIDTH/3 + 95,W_HEIGHT*2/5-W_HEIGHT/7/2 + W_HEIGHT/7 + 122,491,355);
+
+    bool rotateLeft = true;
+    int d = -7;*/
     while (window.isOpen()){
         window.clear();
         
-
-        sf::Event event;
         
-        window.draw(bg);
+        sf::Event event;
+        /*bool fullscreen;
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return) and sf::Keyboard::isKeyPressed(sf::Keyboard::LAlt)) {
+            fullscreen = !fullscreen;
+            window.create(sf::VideoMode(W_WIDTH, W_HEIGHT), APP_NAME, (fullscreen ? sf::Style::Fullscreen : sf::Style::Resize|sf::Style::Close));
+        }*/
+
+       /* if (rotateLeft && d < 15) {
+            title.setRotation(d);
+            ++d;
+        } else if (rotateLeft && d == 15) 
+            rotateLeft = false;
+        if (!rotateLeft && d > -7) {
+            title.setRotation(d);
+            --d;
+        }
+        else if (!rotateLeft && d == -7) rotateLeft = true;
+
+                    window.draw(bg);
+                    window.draw(title);
         window.draw(play);
         window.draw(credits);
-        window.draw(exit);
+        window.draw(title);
+        window.draw(exit);*/
         
         //std::cout << "P " << credits.getPosition().x << " " << credits.getPosition().y << " " << Rcred.left << " " << Rcred.top << std::endl;
         
         
-        window.display();
         while (window.pollEvent(event)){
 
             //Exit
@@ -127,8 +157,6 @@ void Menu::run(){
                 sf::Vector2f worldPos = window.mapPixelToCoords(mousepos);
 
                 sf::IntRect cursorAim(worldPos.x-1,worldPos.y-1,2,2);
-                
-                std::cout << "Mouse " << mousepos.x << " " << mousepos.y << " " << worldPos.x << " " << worldPos.y << std::endl;
                 
                 if (cursorAim.intersects(Rplay)){
                     std::cout << "Play ok!" << std::endl;
@@ -210,28 +238,16 @@ void Menu::run(){
                 else if (cursorAim.intersects(Rexit)){
                     window.close();
                 }
-                /*else if (cursorAim.intersects(Rhtp)) {
-                    cout << "how to play" << endl;
 
-                    play.setPosition(-500,-500);
-                    credits.setPosition(-500,-500);
-                    exit.setPosition(-500,-500);
-
-                    window.clear();
-
-                    sf::Texture bgHTP;
-                    if (!bgHTP.loadFromFile(file_bgHTP)) std::cout << "Error loading spriteSheet" << std::endl;
-                    sf::Sprite bgS;
-                    bgS.setTexture(bgHTP);
-
-                    window.draw(bgS);
-                    window.display();
-                    while(1);
-                }*/
             }
             
         }
-
+        window.draw(bg);
+        window.draw(play);
+        window.draw(credits);
+        //window.draw(title);
+        window.draw(exit);
+        window.display();
 
     }
     
