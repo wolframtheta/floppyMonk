@@ -45,8 +45,8 @@ void Game::play(){
             
             
         Monjo monjo;
-        listNota musica;
-        listNota musica2;
+        listNota musica(false);
+        listNota musica2(true);
         //frequencia entre notes
 
         sf::Texture notaT;
@@ -88,10 +88,16 @@ void Game::play(){
 
 	while(monjo.getHp() > 0 and not exitLoop){ //Player alive
 
-            if (notes_disponibles>=4){ //QWER
-                canE = true; canR = true;
-                if (notes_disponibles==8){  //QWER UIOP
-                    canU = true; canI = true; canO = true; canP = true;
+            if (acertadas > 10) notes_disponibles = 4;
+            if (acertadas > 30) notes_disponibles = 8;
+            
+            if (notes_disponibles>=2){
+                canQ = true; canW = true;
+                if (notes_disponibles>=4){ //QWER
+                    canE = true; canR = true;
+                    if (notes_disponibles==8){  //QWER UIOP
+                        canU = true; canI = true; canO = true; canP = true;
+                    }
                 }
             }
 
@@ -127,7 +133,7 @@ void Game::play(){
                 
                 //Per a cada nota disponible, comprovar si s'encerta o es falla i canviar concentració
                 if (canQ){
-                    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q) and pressQ ){                   //Q
+                    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q) and pressQ ){
                         soundQ.play();
                         encert = musica.encertaNota(1);
                         pressQ = false;
@@ -315,12 +321,19 @@ void Game::play(){
                         multiplicador = 1;
                 }
 
-
+                int spx;
                 if (falladas > oldFalladas) spx = 1280;
+                else {
+                    if (monjo.getLvlConc()<62.5) spx = 0;
+                    else if (monjo.getLvlConc()<125) spx = 320;
+                    else if (monjo.getLvlConc()<187.5) spx = 640;
+                    else spx = 960;
+                    
+                }
+                player.setPosition(monjo.getPos());
                 player.setTextureRect(sf::IntRect(spx,0,320,320));
                 _myWindow->draw(player);
             }
-=======
 
             std::list<Nota>::iterator it = musica.listNotes.begin();
             std::list<Nota>::iterator it2 = musica2.listNotes.begin();
@@ -332,10 +345,10 @@ void Game::play(){
                 it++;
             }
             while (it2 != musica2.listNotes.end()){ //Draw notes UIOP
-                spriteNota.setTextureRect(sf::IntRect(((*it).getType()-1)*80,120,80,80));
-                spriteNota.setPosition(sf::Vector2f((*it).getPos().x + ((*it).getType()-1)*100, (*it).getPos().y));
+                spriteNota.setTextureRect(sf::IntRect(((*it2).getType()-1)*80,120,80,80));
+                spriteNota.setPosition(sf::Vector2f((*it2).getPos().x + ((*it2).getType()-1)*100, (*it2).getPos().y));
                 _myWindow->draw(spriteNota);
-                it++;
+                it2++;
             }
                 
                 

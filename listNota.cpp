@@ -1,12 +1,20 @@
 #include "utils.hpp"
 
-listNota::listNota(){
+listNota::listNota(bool l){
 	
 	tempo = 1.0f;
-	zona.left = posRectangle.x;
-	zona.top = posRectangle.y;
+        left = l;
+	
+        if (!left){
+            zona.left = posRectangle.x;
+            zona.top = posRectangle.y;
+        } else {
+            zona.left = posRectangle2.x;
+            zona.top = posRectangle2.y;
+        }
 	zona.width = 380;
 	zona.height = 80;
+
 	
 }
 
