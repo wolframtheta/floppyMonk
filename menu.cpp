@@ -59,8 +59,10 @@ void Menu::run(){
     title.setPosition(W_WIDTH/2-W_WIDTH/3/2 + W_WIDTH/3 + 350,W_HEIGHT*2/5-W_HEIGHT/7/2 + W_HEIGHT/7 + 300);
     title.setColor(sf::Color(254,238,0));
     title.setOrigin(245,177);
-    sf::IntRect Rhtp(W_WIDTH/2-W_WIDTH/3/2 + W_WIDTH/3 + 350,W_HEIGHT*2/5-W_HEIGHT/7/2 + W_HEIGHT/7 + 300,491,355);
-
+        sf::RectangleShape Rhtp;
+        Rhtp.setPosition(W_WIDTH/2-W_WIDTH/3/2 + W_WIDTH/3 + 95,W_HEIGHT*2/5-W_HEIGHT/7/2 + W_HEIGHT/7 + 122);
+        Rhtp.setSize(sf::Vector2f(491,355));
+    Rhtp.setFillColor(sf::Color(0,0,0));
 
     bool rotateLeft = true;
     int d = -7;
@@ -189,9 +191,9 @@ void Menu::run(){
                 else if (cursorAim.intersects(Rexit)){
                     window.close();
                 }
-                else if (cursorAim.intersects(Rhtp)) {
-                    
-                }
+                /*else if (cursorAim.intersects(Rhtp)) {
+                    cout << "how to play" << endl;
+                }*/
             }
             
         }
@@ -200,6 +202,7 @@ void Menu::run(){
         window.draw(play);
         window.draw(credits);
         window.draw(title);
+        window.draw(Rhtp);
         window.draw(exit);
         
         

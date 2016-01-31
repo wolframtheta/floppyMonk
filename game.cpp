@@ -267,7 +267,7 @@ void Game::play(){
                     if (sf::Keyboard::isKeyPressed(sf::Keyboard::U) and pressU){
                         soundQ.play();
                         encert = musica2.encertaNota(1);
-                        pressQ = false;
+                        pressU = false;
                         if (not encert){
                                 monjo.downLvlConc(false);
                                 racha=0;
@@ -288,7 +288,7 @@ void Game::play(){
                     if (sf::Keyboard::isKeyPressed(sf::Keyboard::I) and pressI){
                         soundW.play();
                         encert = musica2.encertaNota(2);
-                        pressW = false;
+                        pressI = false;
                         if (not encert){
                             monjo.downLvlConc(false);
                             racha=0;
@@ -309,7 +309,7 @@ void Game::play(){
                     if (sf::Keyboard::isKeyPressed(sf::Keyboard::O) and pressO){
                         soundE.play();
                         encert = musica2.encertaNota(3);
-                        pressE = false;
+                        pressO = false;
                         if (not encert){
                             monjo.downLvlConc(false);
                             racha=0;
@@ -330,7 +330,7 @@ void Game::play(){
                     if (sf::Keyboard::isKeyPressed(sf::Keyboard::P) and pressP){
                         soundR.play();
                         encert = musica2.encertaNota(4);
-                        pressR = false;
+                        pressP = false;
                         if (not encert){
                                     monjo.downLvlConc(false);
                                     racha=0;
