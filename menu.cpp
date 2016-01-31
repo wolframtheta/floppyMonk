@@ -54,10 +54,9 @@ void Menu::run(){
     
     sf::RectangleShape play;
         play.setTexture(&bgPlay);
-        play.setSize(sf::Vector2f(1920/3,1080/7));
-        play.setPosition(1920/3,1080*1/7);
-        play.setOrigin(0,0);
-    sf::IntRect Rplay(1920/3,1080*1/7,1920/3,1080/7);
+        play.setSize(sf::Vector2f(640,155));
+        play.setPosition(W_WIDTH/2-320,W_HEIGHT*1/7-155/2);
+    sf::IntRect Rplay(W_WIDTH/2-320,W_HEIGHT*1/7-155/2,640,155);
     
 
     sf::Texture bgCredits;
@@ -65,9 +64,9 @@ void Menu::run(){
     
     sf::RectangleShape credits;
         credits.setTexture(&bgCredits);
-        credits.setSize(sf::Vector2f(1920/3,1080/7));
-        credits.setPosition(1920/3,1080*3/7);
-    sf::IntRect Rcred(1920/3,1080*3/7,1920/3,1080/7);
+        credits.setSize(sf::Vector2f(640,155));
+        credits.setPosition(W_WIDTH/2-320,W_HEIGHT*3/7-155/2);
+    sf::IntRect Rcred(W_WIDTH/2-320,W_HEIGHT*3/7-155/2,640,155);
    
 
     sf::Texture bgExit;
@@ -75,9 +74,9 @@ void Menu::run(){
     
     sf::RectangleShape exit;
         exit.setTexture(&bgExit);
-        exit.setSize(sf::Vector2f(1920/3,1080/7));
-        exit.setPosition(1920/3,1080*5/7);
-    sf::IntRect Rexit(1920/3,1080*5/7,1920/3,1080/7);
+        exit.setSize(sf::Vector2f(640,155));
+        exit.setPosition(W_WIDTH/2-320,W_HEIGHT*5/7-155/2);
+    sf::IntRect Rexit(W_WIDTH/2-320,W_HEIGHT*5/7-155/2,640,155);
     
     
     
@@ -99,7 +98,7 @@ void Menu::run(){
         window.draw(credits);
         window.draw(exit);
         
-        std::cout << "P " << play.getPosition().x << " " << play.getPosition().y << " " << Rplay.top << " " << Rplay.left << std::endl;
+        //std::cout << "P " << credits.getPosition().x << " " << credits.getPosition().y << " " << Rcred.left << " " << Rcred.top << std::endl;
         
         
         window.display();
@@ -124,7 +123,13 @@ void Menu::run(){
             
             if (event.type == sf::Event::MouseButtonReleased){
                 sf::Vector2i mousepos = sf::Mouse::getPosition(window);
-                sf::IntRect cursorAim(mousepos.x-1,mousepos.y-1,2,2);
+                
+                sf::Vector2f worldPos = window.mapPixelToCoords(mousepos);
+
+                sf::IntRect cursorAim(worldPos.x-1,worldPos.y-1,2,2);
+                
+                std::cout << "Mouse " << mousepos.x << " " << mousepos.y << " " << worldPos.x << " " << worldPos.y << std::endl;
+                
                 if (cursorAim.intersects(Rplay)){
                     std::cout << "Play ok!" << std::endl;
 					
@@ -136,9 +141,9 @@ void Menu::run(){
                     joc.play();
 					
 					
-                    play.setPosition(1920/3,1080*1/7);
-                    credits.setPosition(1920/3,1080*3/7);
-                    exit.setPosition(1920/3,1080*5/7);
+                    play.setPosition(W_WIDTH/2-320,W_HEIGHT*1/7-155/2);
+                    credits.setPosition(W_WIDTH/2-320,W_HEIGHT*3/7-155/2);
+                    exit.setPosition(W_WIDTH/2-320,W_HEIGHT*5/7-155/2);
 					
 					sf::RectangleShape fadeRct(sf::Vector2f(W_WIDTH,W_HEIGHT));
 					
@@ -197,9 +202,9 @@ void Menu::run(){
                         
                     }
                     
-                    play.setPosition(1920/3,1080*1/7);
-                    credits.setPosition(1920/3,1080*3/7);
-                    exit.setPosition(1920/3,1080*5/7);
+                    play.setPosition(W_WIDTH/2-320,W_HEIGHT*1/7-155/2);
+                    credits.setPosition(W_WIDTH/2-320,W_HEIGHT*3/7-155/2);
+                    exit.setPosition(W_WIDTH/2-320,W_HEIGHT*5/7-155/2);
                     //Display buttons
                 }
                 else if (cursorAim.intersects(Rexit)){
