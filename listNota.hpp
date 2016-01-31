@@ -6,7 +6,7 @@ class listNota {
 public:
 	
 	listNota(bool);
-	void newNota();
+	void newNota(int);
 	float getTempo();
 	bool update();
 	bool encertaNota(int);

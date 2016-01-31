@@ -1,20 +1,26 @@
 #include "utils.hpp"
 #include "nota.hpp"
 
-Nota::Nota(int nota){
+Nota::Nota(int nota,bool left){
 	// type és la columna que l'hi toca a la nota
 	//	|	|	|	|	\\
 	//	q	w	e	r	\\
 	//	|	|	|	|	\\	
 	
 	type = nota;
+        uiop = left;
 	
 	
 /*	float posx = 1920-400+20*type+40*(type-1);
 	float posy = -40;*/
 	
-	pos.x = posRectangle.x + 20;
-	pos.y = -40;
+	if (uiop) {
+            pos.x = posRectangle2.x + 20;
+            pos.y = -40;
+        } else {
+            pos.x = posRectangle.x + 20;
+            pos.y = -40;
+        }
 	
 }
 

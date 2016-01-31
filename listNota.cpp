@@ -18,9 +18,16 @@ listNota::listNota(bool l){
 	
 }
 
-void listNota::newNota() {
-	Nota nota(rand() % 4 +1);
-	listNotes.push_back(nota);
+void listNota::newNota(int notesDisponibles) {
+    
+    if (left) notesDisponibles-=4;
+    
+    
+    if (notesDisponibles > 0){
+            
+            Nota nota(rand()%notesDisponibles+1,left);
+            listNotes.push_back(nota);
+    }
 }
 
 float listNota::getTempo(){

@@ -84,7 +84,23 @@ void Game::play(){
 		buffer4.loadFromFile("./resources/music/4.ogg");
 		soundR.setBuffer(buffer4);
 
-		
+                
+        sf::Sprite hBRectangle;                 //Draw zone QWER
+            hBRectangle.setTexture(notaT);
+            hBRectangle.setTextureRect(sf::IntRect(0,0,420,120));
+            hBRectangle.setPosition(posRectangle);
+
+        sf::Sprite hBRectangle2;                //Draw zone UIOP
+            hBRectangle2.setTexture(notaT);
+            hBRectangle2.setTextureRect(sf::IntRect(0,0,420,120));
+            hBRectangle2.setPosition(posRectangle2);
+
+        sf::Texture glow;
+            if (!glow.loadFromFile(file_glow)) std::cout << "Error loading glow" << std::endl;
+        
+        sf::Sprite comboGlow;
+            comboGlow.setTexture(glow);
+            
 
 	while(monjo.getHp() > 0 and not exitLoop){ //Player alive
 
@@ -124,11 +140,11 @@ void Game::play(){
                 
                 if  (clock.getElapsedTime().asSeconds() >= musica.getTempo()) {
                     time = clock.restart();
-                    musica.newNota();
+                    musica.newNota(notes_disponibles);
                 }
                 if  (clock2.getElapsedTime().asSeconds() >= musica2.getTempo()) {
                     time2 = clock2.restart();
-                    musica2.newNota();
+                    musica2.newNota(notes_disponibles);
                 }
                 
                 //Per a cada nota disponible, comprovar si s'encerta o es falla i canviar concentració
@@ -350,19 +366,14 @@ void Game::play(){
                 _myWindow->draw(spriteNota);
                 it2++;
             }
-                
-                
-            sf::Sprite hBRectangle;                 //Draw zone QWER
-		hBRectangle.setTexture(notaT);
-		hBRectangle.setTextureRect(sf::IntRect(0,0,420,120));
-		hBRectangle.setPosition(posRectangle);
-                _myWindow->draw(hBRectangle);
-            sf::Sprite hBRectangle2;                //Draw zone UIOP
-		hBRectangle2.setTexture(notaT);
-		hBRectangle2.setTextureRect(sf::IntRect(0,0,420,120));
-		hBRectangle2.setPosition(posRectangle2);
-                _myWindow->draw(hBRectangle2);
             
+            _myWindow->draw(hBRectangle);
+            _myWindow->draw(hBRectangle2);
+            comboGlow.setTextureRect(sf::IntRect(0,140*multiplicador-1,440,140));
+            comboGlow.setPosition(posRectangle.x-10,posRectangle.y-10);
+            _myWindow->draw(comboGlow);
+            comboGlow.setPosition(posRectangle2.x-10,posRectangle2.y-10);
+            _myWindow->draw(comboGlow);
             
             
                 
@@ -383,23 +394,18 @@ void Game::play(){
                 switch (multiplicador) {
                     case 2:
                         numberMultiplier.setColor(sf::Color(0,0,204));
-                        hBRectangle.setColor(sf::Color(0,0,204));
                         break;
                     case 3:
                         numberMultiplier.setColor(sf::Color(128,255,0));
-                        hBRectangle.setColor(sf::Color(128,255,0));
                         break;
                     case 4:
                         numberMultiplier.setColor(sf::Color(0,51,0));
-                        hBRectangle.setColor(sf::Color(0,51,0));
                         break;
                     case 5:
                         numberMultiplier.setColor(sf::Color(204,0,204));
-                        hBRectangle.setColor(sf::Color(204,0,204));
                         break;
                     case 6:	
                         numberMultiplier.setColor(sf::Color(255,0,0));
-                        hBRectangle.setColor(sf::Color(255,0,0));
                         break;
                 }
                 _myWindow->draw(numberMultiplier);
@@ -425,7 +431,7 @@ void Game::play(){
             ////puntuacuiones
             if(racha>max_combo) max_combo=racha;
 
-            if(racha<=5) multiplicador = 2;
+            if(racha<=5 and racha>1) multiplicador = 2;
             else if (racha<=12) multiplicador = 3;
             else if (racha<=17) multiplicador = 4;
             else if (racha<=24) multiplicador = 5;

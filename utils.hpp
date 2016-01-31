@@ -38,12 +38,13 @@ using namespace std;
 static const sf::Vector2f posRectangle = sf::Vector2f(1250, 760);
 static const sf::Vector2f posRectangle2 = sf::Vector2f(250,760);
 
-static const char* file_monjo = "./resources/MonkSprite320.png";
-static const char* file_bg = "./resources/bg.png";
-static const char* file_tile="./resources/Sprite.png";
-static const char* file_play = "./resources/ButtonPlay.png";
-static const char* file_credits = "./resources/ButtonCredits.png";
-static const char* file_exit = "./resources/ButtonExit.png";
+static const char* file_monjo = "./resources/images/MonkSprite320.png";
+static const char* file_bg = "./resources/images/bg.png";
+static const char* file_tile="./resources/images/Sprite.png";
+static const char* file_glow="./resources/images/ComboColor.png";
+static const char* file_play = "./resources/images/ButtonPlay.png";
+static const char* file_credits = "./resources/images/ButtonCredits.png";
+static const char* file_exit = "./resources/images/ButtonExit.png";
 
 static const std::vector<float> vel = {1.0, 0.9,0.8,0.7,0.6,0.5,0.4,0.3,0.2,0.1};
 
