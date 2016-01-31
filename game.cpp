@@ -9,7 +9,7 @@ Game::Game(sf::RenderWindow* window): _myWindow(window){
 
 void Game::play(){
 
-        //elo system
+//elo system
 		int racha = 0;
 		int multiplicador = 1;
 		int falladas = 0;
@@ -19,13 +19,13 @@ void Game::play(){
 		int mana = 0;
 		sf::Clock GameTime; // starts the clock
 
-
-
+//Textura bg
 
         sf::Texture bgT;
 	if (!bgT.loadFromFile(file_bg)) std::cout << "Error loading spriteSheet" << std::endl;
         bg.setTexture(bgT);
         
+//Rectangles de la vida
 
         sf::RectangleShape hp1;
             hp1.setFillColor(sf::Color(171,0,0));
@@ -36,39 +36,44 @@ void Game::play(){
             hp2.setSize(sf::Vector2f(W_WIDTH/3,20));
             hp2.setPosition(200,130);
 
+//Textura del monjo i sprite
 
         sf::Texture monjoT;
             if (!monjoT.loadFromFile(file_monjo)) std::cout << "Failed to load monjo" << std::endl;
         sf::Sprite player;
             player.setTexture(monjoT);
 	
-            
+//Creem el monjo i les dues llistes de notes            
             
         Monjo monjo;
-        listNota musica(false);
+        listNota musica1(false);
         listNota musica2(true);
         //frequencia entre notes
+
+//Implementem la textura i sprite d'una nota
 
         sf::Texture notaT;
             if (!notaT.loadFromFile(file_tile)) std::cout << "Failed to load nota" << std::endl;
         sf::Sprite spriteNota;
             spriteNota.setTexture(notaT);
-        
-	//creem el rellotge del joc
-	sf::Clock clock;
+  
+//Creem els rellotges
+
+	sf::Clock clock1;
         sf::Clock clock2;
-	sf::Time time = sf::seconds(0);
+	sf::Time time1 = sf::seconds(0);
         sf::Time time2 = sf::seconds(0);
         
-        //Control de les tecles que es poden prémer
+//Control de les tecles que es poden prémer
 	bool pressQ = true, pressW = true, pressE = true, pressR = true;
         bool pressU = true, pressI = true, pressO = true, pressP = true;
         
-        //Control dels carrils per els quals poden apareixer notes
+//Control dels carrils per els quals poden apareixer notes
         bool canQ, canW, canE, canR, canU, canI, canO, canP;
         
         bool exitLoop = false;
 	
+//Carreguem els sons
 
     	sf::SoundBuffer buffer1, buffer2, buffer3, buffer4;
             sf::Sound soundQ;
@@ -84,6 +89,7 @@ void Game::play(){
 		buffer4.loadFromFile("./resources/music/4.ogg");
 		soundR.setBuffer(buffer4);
 
+//Creem les barres on s'han de premer les notes
                 
         sf::Sprite hBRectangle;                 //Draw zone QWER
             hBRectangle.setTexture(notaT);
@@ -94,6 +100,8 @@ void Game::play(){
             hBRectangle2.setTexture(notaT);
             hBRectangle2.setTextureRect(sf::IntRect(0,0,420,120));
             hBRectangle2.setPosition(posRectangle2);
+
+//Pistes per les lletres a clickar
  
         sf::Sprite keyHint1;
         	keyHint1.setTexture(notaT);
@@ -102,18 +110,22 @@ void Game::play(){
         	keyHint2.setTexture(notaT);
         	keyHint2.setPosition(posRectangle2.x,posRectangle2.y+20);
 
+//Efectes de combo
+
         sf::Texture glow;
             if (!glow.loadFromFile(file_glow)) std::cout << "Error loading glow" << std::endl;
         
         sf::Sprite comboGlow;
             comboGlow.setTexture(glow);
-            
+
+//LOOP PRINCIPAL	@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 	while(monjo.getHp() > 0 and not exitLoop){ //Player alive
-
+	
+	//Factor de desbloqueig
             if (acertadas >= 10) notes_disponibles = 4;
             if (acertadas >= 30) notes_disponibles = 8;
-            
+        
             if (notes_disponibles>=2){ //QW
                 canQ = true; canW = true;
                 if (notes_disponibles>=4){ //QWER
@@ -123,10 +135,8 @@ void Game::play(){
                     }
                 }
             }
-
-
             
-            
+        //Event3
             sf::Event event3;
             while (_myWindow->pollEvent(event3)){
                 if (event3.type == sf::Event::Closed) exitLoop = true;
@@ -137,42 +147,46 @@ void Game::play(){
                 }    
             }
             
+        //clear i draw del bg
             _myWindow->clear();
             _myWindow->draw(bg);
 
-            if (notes_disponibles==2){
+	//dibuixar pistes de les lletres segons el facor de desbloqueig
+            if (notes_disponibles == 2){
             	keyHint1.setTextureRect(sf::IntRect(0,200,210,80));
             	_myWindow->draw(keyHint1);
             }
-            else if (notes_disponibles==4){
+            else if (notes_disponibles == 4){
 				keyHint1.setTextureRect(sf::IntRect(0,200,480,80));
 				_myWindow->draw(keyHint1);
             }
-            else if (notes_disponibles==8){
+            else if (notes_disponibles == 8){
             	keyHint1.setTextureRect(sf::IntRect(0,200,480,80));
             	keyHint2.setTextureRect(sf::IntRect(0,280,480,80));
             	_myWindow->draw(keyHint1);
             	_myWindow->draw(keyHint2);
             }
-            
-            if (notes_disponibles>0){ //Key presses
-                int oldFalladas = falladas;
-                bool encert = false;
-                
-                if  (clock.getElapsedTime().asSeconds() >= musica.getTempo()) {
-                    time = clock.restart();
-                    musica.newNota(notes_disponibles);
+       
+            if (notes_disponibles > 0){ //Key presses
+            	//Generar notes
+                if  (clock1.getElapsedTime().asSeconds() >= musica1.getTempo()) {
+                    time1 = clock1.restart();
+                    musica1.newNota(notes_disponibles);
                 }
                 if  (clock2.getElapsedTime().asSeconds() >= musica2.getTempo()) {
                     time2 = clock2.restart();
                     musica2.newNota(notes_disponibles);
                 }
                 
+                int oldFalladas = falladas;
+                bool encert = false;
+        
+                
                 //Per a cada nota disponible, comprovar si s'encerta o es falla i canviar concentració
                 if (canQ){
                     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q) and pressQ ){
                         soundQ.play();
-                        encert = musica.encertaNota(1);
+                        encert = musica1.encertaNota(1);
                         pressQ = false;
                         if (not encert) {
                             monjo.downLvlConc(false);
@@ -194,7 +208,7 @@ void Game::play(){
                 if (canW){
                     if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) and pressW){
                             soundW.play();
-                            encert = musica.encertaNota(2);
+                            encert = musica1.encertaNota(2);
                             pressW = false;
                             if (not encert){
                                     monjo.downLvlConc(false);
@@ -218,7 +232,7 @@ void Game::play(){
                 if (canE){
                     if (sf::Keyboard::isKeyPressed(sf::Keyboard::E) and pressE){
                             soundE.play();
-                            encert = musica.encertaNota(3);
+                            encert = musica1.encertaNota(3);
                             pressE = false;
                             if (not encert){
                                     monjo.downLvlConc(false);
@@ -242,7 +256,7 @@ void Game::play(){
                 if (canR){
                     if (sf::Keyboard::isKeyPressed(sf::Keyboard::R) and pressR){
                             soundR.play();
-                            encert = musica.encertaNota(4);
+                            encert = musica1.encertaNota(4);
                             pressR = false;
                             if (not encert) {
                                     monjo.downLvlConc(false);
@@ -350,7 +364,7 @@ void Game::play(){
                 }
 
                 bool notaPerduda = false;
-                notaPerduda = musica.update() and musica2.update();
+                notaPerduda = musica1.update() or musica2.update();
                 if (notaPerduda) {
                         monjo.downLvlConc(true);
                         racha = 0;
@@ -372,14 +386,14 @@ void Game::play(){
                 _myWindow->draw(player);
             }
 
-            std::list<Nota>::iterator it = musica.listNotes.begin();
+            std::list<Nota>::iterator it1 = musica1.listNotes.begin();
             std::list<Nota>::iterator it2 = musica2.listNotes.begin();
             
-            while (it != musica.listNotes.end()){ //Draw notes QWER
-                spriteNota.setTextureRect(sf::IntRect(((*it).getType()-1)*80,120,80,80));
-                spriteNota.setPosition(sf::Vector2f((*it).getPos().x + ((*it).getType()-1)*100, (*it).getPos().y));
+            while (it1 != musica1.listNotes.end()){ //Draw notes QWER
+                spriteNota.setTextureRect(sf::IntRect(((*it1).getType()-1)*80,120,80,80));
+                spriteNota.setPosition(sf::Vector2f((*it1).getPos().x + ((*it1).getType()-1)*100, (*it1).getPos().y));
                 _myWindow->draw(spriteNota);
-                it++;
+                it1++;
             }
             while (it2 != musica2.listNotes.end()){ //Draw notes UIOP
                 spriteNota.setTextureRect(sf::IntRect(((*it2).getType()-1)*80,120,80,80));
@@ -446,7 +460,7 @@ void Game::play(){
             _myWindow->draw(hp2);
             _myWindow->display();
 		
-            musica.setTempo(vel[((monjo.getLvlConc()-1)/25)%10]);
+            musica1.setTempo(vel[((monjo.getLvlConc()-1)/25)%10]);
             musica2.setTempo(vel[((monjo.getLvlConc()-1)/25)%10]);
 
             ////puntuacuiones
